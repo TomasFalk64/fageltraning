@@ -1,0 +1,2254 @@
+{
+  "Branta bernicla": {
+    "name": "Prutgås",
+    "clue": "Gutturalt prrutk",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Branta ruficollis": {
+    "name": "Rödhalsad gås",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Branta canadensis": {
+    "name": "Kanadagås",
+    "clue": "nasalt, tvåstavigt å-lytt, går upp i falsett",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Branta leucopsis": {
+    "name": "Vitkindad gås",
+    "clue": "Enstavigt skällande ka i olika tonlägen",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anser indicus": {
+    "name": "Stripgås",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anser anser": {
+    "name": "Grågås",
+    "clue": "grovt och nasalt kiaa-ga-ga, börjar i falsett.",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anser fabalis": {
+    "name": "Sädgås",
+    "clue": "nasalt  ank eller ank-ank",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anser brachyrhynchus": {
+    "name": "Spetsbergsgås",
+    "clue": "hanar ljusa läten, honor lägre och mer nasala",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anser albifrons": {
+    "name": "Bläsgås",
+    "clue": "Melodiskt ofta tvåstavigt ky-jy eller ky-jy-jy",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Cygnus olor": {
+    "name": "Knölsvan",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Cygnus columbianus": {
+    "name": "Mindre sångsvan",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Cygnus cygnus": {
+    "name": "Sångsvan",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Alopochen aegyptiaca": {
+    "name": "Nilgås",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tadorna tadorna": {
+    "name": "Gravand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tadorna ferruginea": {
+    "name": "Rostand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Aix galericulata": {
+    "name": "Mandarinand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Spatula querquedula": {
+    "name": "Årta",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Spatula clypeata": {
+    "name": "Skedand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Mareca strepera": {
+    "name": "Snatterand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Mareca penelope": {
+    "name": "Bläsand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anas platyrhynchos": {
+    "name": "Gräsand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anas acuta": {
+    "name": "Stjärtand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anas crecca": {
+    "name": "Kricka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anas carolinensis": {
+    "name": "Amerikansk kricka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Netta rufina": {
+    "name": "Rödhuvad dykand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Aythya ferina": {
+    "name": "Brunand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Aythya fuligula": {
+    "name": "Vigg",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Aythya marila": {
+    "name": "Bergand",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Polysticta stelleri": {
+    "name": "Alförrädare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Somateria spectabilis": {
+    "name": "Praktejder",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Somateria mollissima": {
+    "name": "Ejder",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Melanitta perspecillata": {
+    "name": "Vitnackad svärta",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Melanitta fusca": {
+    "name": "Svärta",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Melanitta nigra": {
+    "name": "Sjöorre",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Clangula hyemalis": {
+    "name": "Alfågel",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Bucephala clangula": {
+    "name": "Knipa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Mergellus albellus": {
+    "name": "Salskrake",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Mergus serrator": {
+    "name": "Småskrake",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Mergus merganser": {
+    "name": "Storskrake",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tetrastes bonasia": {
+    "name": "Järpe",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Lagopus lagopus": {
+    "name": "Dalripa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Lagopus muta": {
+    "name": "Fjällripa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tetrao urogallus": {
+    "name": "Tjäder",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Lyrurus tetrix": {
+    "name": "Orre",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Perdix perdix": {
+    "name": "Rapphöna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phasianus colchicus": {
+    "name": "Fasan",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Coturnix coturnix": {
+    "name": "Vaktel",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Caprimulgus europaeus": {
+    "name": "Nattskärra",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Apus apus": {
+    "name": "Tornseglare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Cuculus canorus": {
+    "name": "Gök",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Streptopelia turtur": {
+    "name": "Turturduva",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Streptopelia decaocto": {
+    "name": "Turkduva",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Columba livia": {
+    "name": "Tamduva",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Columba oenas": {
+    "name": "Skogsduva",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Columba palumbus": {
+    "name": "Ringduva",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Rallus aquaticus": {
+    "name": "Vattenrall",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Crex crex": {
+    "name": "Kornknarr",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Porzana porzana": {
+    "name": "Småfläckig sumphöna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Gallinula chloropus": {
+    "name": "Rörhöna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Fulica atra": {
+    "name": "Sothöna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Zapornia parva": {
+    "name": "Mindre sumphöna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Grus grus": {
+    "name": "Trana",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tachybaptus ruficollis": {
+    "name": "Smådopping",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Podiceps grisegena": {
+    "name": "Gråhakedopping",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Podiceps cristatus": {
+    "name": "Skäggdopping",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Podiceps auritus": {
+    "name": "Svarthakedopping",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Podiceps nigricollis": {
+    "name": "Svarthalsad dopping",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Haematopus ostralegus": {
+    "name": "Strandskata",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Recurvirostra avosetta": {
+    "name": "Skärfläcka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Pluvialis squatarola": {
+    "name": "Kustpipare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Pluvialis apricaria": {
+    "name": "Ljungpipare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Eudromias morinellus": {
+    "name": "Fjällpipare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Charadrius hiaticula": {
+    "name": "Större strandpipare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Charadrius dubius": {
+    "name": "Mindre strandpipare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Vanellus vanellus": {
+    "name": "Tofsvipa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anarhynchus alexandrinus": {
+    "name": "Svartbent strandpipare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Numenius phaeopus": {
+    "name": "Småspov",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Numenius arquata": {
+    "name": "Storspov",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Limosa lapponica": {
+    "name": "Myrspov",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Limosa limosa": {
+    "name": "Rödspov",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Lymnocryptes minimus": {
+    "name": "Dvärgbeckasin",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Scolopax rusticola": {
+    "name": "Morkulla",
+    "clue": "ljust pst följt av knorr knorr",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Gallinago media": {
+    "name": "Dubbelbeckasin",
+    "clue": "studsande pingpongbollar",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Gallinago gallinago": {
+    "name": "Enkelbeckasin",
+    "clue": "rytmiskt ticka-a tick-a + wobblande flyktläte",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phalaropus fulicarius": {
+    "name": "Brednäbbad simsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phalaropus lobatus": {
+    "name": "Smalnäbbad simsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Xenus cinereus": {
+    "name": "Tereksnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Actitis hypoleucos": {
+    "name": "Drillsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tringa ochropus": {
+    "name": "Skogssnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tringa stagnatilis": {
+    "name": "Dammsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tringa glareola": {
+    "name": "Grönbena",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tringa totanus": {
+    "name": "Rödbena",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tringa erythropus": {
+    "name": "Svartsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Tringa nebularia": {
+    "name": "Gluttsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Arenaria interpres": {
+    "name": "Roskarl",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calidris canutus": {
+    "name": "Kustsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calidris pugnax": {
+    "name": "Brushane",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calidris falcinellus": {
+    "name": "Myrsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calidris ferruginea": {
+    "name": "Spovsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calidris temminckii": {
+    "name": "Mosnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calidris alba": {
+    "name": "Sandlöpare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calidris alpina": {
+    "name": "Kärrsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calidris maritima": {
+    "name": "Skärsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calidris minuta": {
+    "name": "Småsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calidris melanotos": {
+    "name": "Tuvsnäppa",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Stercorarius longicaudus": {
+    "name": "Fjällabb",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Stercorarius parasiticus": {
+    "name": "Kustlabb",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Stercorarius pomarinus": {
+    "name": "Bredstjärtad labb",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Stercorarius skua": {
+    "name": "Storlabb",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Fratercula arctica": {
+    "name": "Lunnefågel",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Cepphus grylle": {
+    "name": "Tobisgrissla",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Alca torda": {
+    "name": "Tordmule",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Alle alle": {
+    "name": "Alkekung",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Uria aalge": {
+    "name": "Sillgrissla",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Sternula albifrons": {
+    "name": "Småtärna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Gelochelidon nilotica": {
+    "name": "Sandtärna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Hydroprogne caspia": {
+    "name": "Skräntärna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Chlidonias niger": {
+    "name": "Svarttärna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Chlidonias leucopterus": {
+    "name": "Vitvingad tärna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Thalasseus sandvicensis": {
+    "name": "Kentsk tärna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Sterna paradisaea": {
+    "name": "Silvertärna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Sterna hirundo": {
+    "name": "Fisktärna",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Hydrocoloeus minutus": {
+    "name": "Dvärgmås",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Rissa tridactyla": {
+    "name": "Tretåig mås",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Xema sabini": {
+    "name": "Tärnmås",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Chroicocephalus ridibundus": {
+    "name": "Skrattmås",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Ichthyaetus melanocephalus": {
+    "name": "Svarthuvad mås",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Larus canus": {
+    "name": "Fiskmås",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Larus hyperboreus": {
+    "name": "Vittrut",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Larus argentatus": {
+    "name": "Gråtrut",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Larus cachinnans": {
+    "name": "Kaspisk trut",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Larus fuscus": {
+    "name": "Silltrut",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Larus marinus": {
+    "name": "Havstrut",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Larus michahellis": {
+    "name": "Medelhavstrut",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Larus glaucoides": {
+    "name": "Vitvingad trut",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Gavia stellata": {
+    "name": "Smålom",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Gavia arctica": {
+    "name": "Storlom",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Gavia immer": {
+    "name": "Svartnäbbad islom",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Gavia adamsii": {
+    "name": "Vitnäbbad islom",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Hydrobates pelagicus": {
+    "name": "Stormsvala",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Hydrobates leucorhous": {
+    "name": "Klykstjärtad stormsvala",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Fulmarus glacialis": {
+    "name": "Stormfågel",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Ardenna grisea": {
+    "name": "Grålira",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Puffinus puffinus": {
+    "name": "Mindre lira",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Morus bassanus": {
+    "name": "Havssula",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phalacrocorax carbo": {
+    "name": "Storskarv",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Gulosus aristotelis": {
+    "name": "Toppskarv",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Platalea leucorodia": {
+    "name": "Skedstork",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Botaurus stellaris": {
+    "name": "Rördrom",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Ardea alba": {
+    "name": "Ägretthäger",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Ardea cinerea": {
+    "name": "Gråhäger",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Pandion haliaetus": {
+    "name": "Fiskgjuse",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Pernis apivorus": {
+    "name": "Bivråk",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Clanga pomarina": {
+    "name": "Mindre skrikörn",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Clanga clanga": {
+    "name": "Större skrikörn",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Aquila chrysaetos": {
+    "name": "Kungsörn",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Accipiter nisus": {
+    "name": "Sparvhök",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Accipiter gentilis": {
+    "name": "Duvhök",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Circus aeruginosus": {
+    "name": "Brun kärrhök",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Circus cyaneus": {
+    "name": "Blå kärrhök",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Circus macrourus": {
+    "name": "Stäpphök",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Circus pygargus": {
+    "name": "Ängshök",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Milvus milvus": {
+    "name": "Röd glada",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Milvus migrans": {
+    "name": "Brun glada",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Haliaeetus albicilla": {
+    "name": "Havsörn",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Buteo lagopus": {
+    "name": "Fjällvråk",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Buteo buteo": {
+    "name": "Ormvråk",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Aegolius funereus": {
+    "name": "Pärluggla",
+    "clue": "Snabbt ljust hohohohoho",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Surnia ulula": {
+    "name": "Hökuggla",
+    "clue": "Bubblande",
+    "confusionSpecies": [
+      "Aegolius funereus"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Glaucidium passerinum": {
+    "name": "Sparvuggla",
+    "clue": "Visslande",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Asio flammeus": {
+    "name": "Jorduggla",
+    "clue": "5-10 halvsnabbt djupa hohohohoho",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Asio otus": {
+    "name": "Hornuggla",
+    "clue": "Upprepat långsamt ho eller honans nasala pee-å",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Bubo bubo": {
+    "name": "Berguv",
+    "clue": "Mycket djupt tvåstavigt hoande oo-hoo",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Strix aluco": {
+    "name": "Kattuggla",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Strix uralensis": {
+    "name": "Slaguggla",
+    "clue": "hoho  hohoåhoho",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Strix nebulosa": {
+    "name": "Lappuggla",
+    "clue": "Långsamt djupa hoanden som sjunker i tonhöjd och styrka mot slutet",
+    "confusionSpecies": [
+      "Aegolius funereus",
+      "Asio flammeus"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Upupa epops": {
+    "name": "Härfågel",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Coracias garrulus": {
+    "name": "Blåkråka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Alcedo atthis": {
+    "name": "Kungsfiskare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Jynx torquilla": {
+    "name": "Göktyta",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Picoides tridactylus": {
+    "name": "Tretåig hackspett",
+    "clue": "",
+    "confusionSpecies": [
+      "Dryobates minor",
+      "Dendrocopos major"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Dryobates minor": {
+    "name": "Mindre hackspett",
+    "clue": "",
+    "confusionSpecies": [
+      "Dendrocopos major"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Dendrocopos major": {
+    "name": "Större hackspett",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Dendrocopos leucotos": {
+    "name": "Vitryggig hackspett",
+    "clue": "",
+    "confusionSpecies": [
+      "Dryobates minor"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Dryocopus martius": {
+    "name": "Spillkråka",
+    "clue": "",
+    "confusionSpecies": [
+      "Picus viridis"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Picus viridis": {
+    "name": "Gröngöling",
+    "clue": "",
+    "confusionSpecies": [
+      "Dryocopus martius"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Picus canus": {
+    "name": "Gråspett",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Falco tinnunculus": {
+    "name": "Tornfalk",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Falco vespertinus": {
+    "name": "Aftonfalk",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Falco columbarius": {
+    "name": "Stenfalk",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Falco subbuteo": {
+    "name": "Lärkfalk",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Falco rusticolus": {
+    "name": "Jaktfalk",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Falco peregrinus": {
+    "name": "Pilgrimsfalk",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Oriolus oriolus": {
+    "name": "Sommargylling",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Lanius excubitor": {
+    "name": "Varfågel",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Lanius minor": {
+    "name": "Svartpannad törnskata",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Lanius collurio": {
+    "name": "Törnskata",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Perisoreus infaustus": {
+    "name": "Lavskrika",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Garrulus glandarius": {
+    "name": "Nötskrika",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Pica pica": {
+    "name": "Skata",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Nucifraga caryocatactes": {
+    "name": "Nötkråka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Corvus monedula": {
+    "name": "Kaja",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Corvus frugilegus": {
+    "name": "Råka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Corvus corax": {
+    "name": "Korp",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Corvus cornix": {
+    "name": "Gråkråka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Periparus ater": {
+    "name": "Svartmes",
+    "clue": "",
+    "confusionSpecies": [
+      "Parus major"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Lophophanes cristatus": {
+    "name": "Tofsmes",
+    "clue": "Bubblande",
+    "confusionSpecies": [
+      "Parus major"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Poecile cinctus": {
+    "name": "Lappmes",
+    "clue": "",
+    "confusionSpecies": [
+      "Parus major",
+      "Cyanistes caeruleus"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Poecile palustris": {
+    "name": "Entita",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Poecile montanus": {
+    "name": "Talltita",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Cyanistes caeruleus": {
+    "name": "Blåmes",
+    "clue": "Ljusa toner följt av mörkare snabbare",
+    "confusionSpecies": [
+      "Parus major"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Parus major": {
+    "name": "Talgoxe",
+    "clue": "ti-tut ibland trestavigt",
+    "confusionSpecies": [
+      "Cyanistes caeruleus"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Remiz pendulinus": {
+    "name": "Pungmes",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Panurus biarmicus": {
+    "name": "Skäggmes",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Lullula arborea": {
+    "name": "Trädlärka",
+    "clue": "upprepat melodiskt dalande lu-lu-lu",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Alauda arvensis": {
+    "name": "Sånglärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Galerida cristata": {
+    "name": "Tofslärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Eremophila alpestris": {
+    "name": "Berglärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calandrella brachydactyla": {
+    "name": "Korttålärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Riparia riparia": {
+    "name": "Backsvala",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Hirundo rustica": {
+    "name": "Ladusvala",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Delichon urbicum": {
+    "name": "Hussvala",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Cecropis daurica": {
+    "name": "Rostgumpsvala",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Aegithalos caudatus": {
+    "name": "Stjärtmes",
+    "clue": "Surrande tserr och trestavigt si-si-si",
+    "confusionSpecies": [
+      "Cyanistes caeruleus",
+      "Periparus ater",
+      "Parus major"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phylloscopus sibilatrix": {
+    "name": "Grönsångare",
+    "clue": "Silverslant",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phylloscopus humei": {
+    "name": "Bergtajgasångare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phylloscopus inornatus": {
+    "name": "Tajgasångare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phylloscopus proregulus": {
+    "name": "Kungsfågelsångare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phylloscopus fuscatus": {
+    "name": "Brunsångare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phylloscopus schwarzi": {
+    "name": "Videsångare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phylloscopus trochilus": {
+    "name": "Lövsångare",
+    "clue": "Avtagande tempo i slutet",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phylloscopus collybita": {
+    "name": "Gransångare",
+    "clue": "chiff chaff",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phylloscopus trochiloides": {
+    "name": "Lundsångare",
+    "clue": "",
+    "confusionSpecies": [
+      "Acrocephalus dumetorum"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phylloscopus borealis": {
+    "name": "Nordsångare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Acrocephalus arundinaceus": {
+    "name": "Trastsångare",
+    "clue": "Dovt kraxande pladder",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Acrocephalus schoenobaenus": {
+    "name": "Sävsångare",
+    "clue": "Snabb rörligt varierat tjattrande",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Acrocephalus dumetorum": {
+    "name": "Busksångare",
+    "clue": "långsam och upprepande (åtta till tio gånger), växlar med skalor och visslingar",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Acrocephalus scirpaceus": {
+    "name": "Rörsångare",
+    "clue": "Sävligt orörligt tjattrande",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Acrocephalus palustris": {
+    "name": "Kärrsångare",
+    "clue": "Snabbt tempo visslar, knäpper och svirrar",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Hippolais icterina": {
+    "name": "Härmsångare",
+    "clue": "Snabb varierad sång med nasalt inslag ibland",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Locustella fluviatilis": {
+    "name": "Flodsångare",
+    "clue": "Symaskin",
+    "confusionSpecies": [
+      "Locustella naevia",
+      "Locustella luscinioides"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Locustella luscinioides": {
+    "name": "Vassångare",
+    "clue": "Mörkt r-r-r-r-r-r-r-r-r...",
+    "confusionSpecies": [
+      "Locustella fluviatilis",
+      "Locustella naevia"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Locustella naevia": {
+    "name": "Gräshoppsångare",
+    "clue": "Ljust kontinuerligt rrrrrrrr…",
+    "confusionSpecies": [
+      "Locustella fluviatilis",
+      "Locustella luscinioides"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Sylvia atricapilla": {
+    "name": "Svarthätta",
+    "clue": "Porlande, med flöjt i slutet och vissa höga toner",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Sylvia borin": {
+    "name": "Trädgårdssångare",
+    "clue": "Snabba porlande strofer utan flöjt i slutet",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Curruca nisoria": {
+    "name": "Höksångare",
+    "clue": "Tjattrande med många klara toner",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Curruca curruca": {
+    "name": "Ärtsångare",
+    "clue": "Stadig ärta i burk",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Curruca communis": {
+    "name": "Törnsångare",
+    "clue": "Tycker du det, tycker du. Kvittrar ibland",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Regulus ignicapilla": {
+    "name": "Brandkronad kungsfågel",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Regulus regulus": {
+    "name": "Kungsfågel",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Bombycilla garrulus": {
+    "name": "Sidensvans",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Troglodytes troglodytes": {
+    "name": "Gärdsmyg",
+    "clue": "Kraftfulla drillar och snabbt tje-tje-tje-tje",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Sitta europaea": {
+    "name": "Nötväcka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Certhia familiaris": {
+    "name": "Trädkrypare",
+    "clue": "ljusa sii, kvitter, porlanade och ibland vissling",
+    "confusionSpecies": [
+      "Erithacus rubecula"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Certhia brachydactyla": {
+    "name": "Trädgårdsträdkrypare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Sturnus vulgaris": {
+    "name": "Stare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Pastor roseus": {
+    "name": "Rosenstare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Turdus philomelos": {
+    "name": "Taltrast",
+    "clue": "Upprepar sig",
+    "confusionSpecies": [
+      "Turdus merula"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Turdus viscivorus": {
+    "name": "Dubbeltrast",
+    "clue": "Lik koltrast men kortare och vemodigt gäll",
+    "confusionSpecies": [
+      "Turdus merula"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Turdus torquatus": {
+    "name": "Ringtrast",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Turdus iliacus": {
+    "name": "Rödvingetrast",
+    "clue": "fallande flöjtande toner avslutas med gnissel",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Turdus merula": {
+    "name": "Koltrast",
+    "clue": "melodisk med långa strofer",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Turdus pilaris": {
+    "name": "Björktrast",
+    "clue": "krax och trastgnissel",
+    "confusionSpecies": [
+      "Turdus merula"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Muscicapa striata": {
+    "name": "Grå flugsnappare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Erithacus rubecula": {
+    "name": "Rödhake",
+    "clue": "snabbt kvitter med enstaka mycket ljusa toner",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Luscinia luscinia": {
+    "name": "Näktergal",
+    "clue": "Ljudligt huitt, knäppande, smackande och slag",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Luscinia svecica": {
+    "name": "Blåhake",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Ficedula parva": {
+    "name": "Mindre flugsnappare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Ficedula hypoleuca": {
+    "name": "Svartvit flugsnappare",
+    "clue": "20 20 17",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Ficedula albicollis": {
+    "name": "Halsbandsflugsnappare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phoenicurus ochruros": {
+    "name": "Svart rödstjärt",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Phoenicurus phoenicurus": {
+    "name": "Rödstjärt",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Saxicola rubetra": {
+    "name": "Buskskvätta",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Saxicola rubicola": {
+    "name": "Svarthakad buskskvätta",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Oenanthe oenanthe": {
+    "name": "Stenskvätta",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Cinclus cinclus": {
+    "name": "Strömstare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Prunella modularis": {
+    "name": "Järnsparv",
+    "clue": "Snabb rörlig högfrekvent strof",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Passer montanus": {
+    "name": "Pilfink",
+    "clue": "Tjipp",
+    "confusionSpecies": [
+      "Passer domesticus"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Passer domesticus": {
+    "name": "Gråsparv",
+    "clue": "tjilb",
+    "confusionSpecies": [
+      "Passer montanus"
+    ],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Motacilla flava": {
+    "name": "Gulärla",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Motacilla citreola": {
+    "name": "Citronärla",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Motacilla cinerea": {
+    "name": "Forsärla",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Motacilla alba": {
+    "name": "Sädesärla",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anthus campestris": {
+    "name": "Fältpiplärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anthus richardi": {
+    "name": "Större piplärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anthus trivialis": {
+    "name": "Trädpiplärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anthus cervinus": {
+    "name": "Rödstrupig piplärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anthus pratensis": {
+    "name": "Ängspiplärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anthus spinoletta": {
+    "name": "Vattenpiplärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Anthus petrosus": {
+    "name": "Skärpiplärka",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Fringilla coelebs": {
+    "name": "Bofink",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Fringilla montifringilla": {
+    "name": "Bergfink",
+    "clue": "rrrr utan sjunkande tonhöjd i slutet",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Coccothraustes coccothraustes": {
+    "name": "Stenknäck",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Pinicola enucleator": {
+    "name": "Tallbit",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Pyrrhula pyrrhula": {
+    "name": "Domherre",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Carpodacus erythrinus": {
+    "name": "Rosenfink",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Chloris chloris": {
+    "name": "Grönfink",
+    "clue": "rrr sjunkande i slutet",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Linaria flavirostris": {
+    "name": "Vinterhämpling",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Linaria cannabina": {
+    "name": "Hämpling",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Acanthis flammea": {
+    "name": "Gråsiska",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Loxia pytyopsittacus": {
+    "name": "Större korsnäbb",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Loxia curvirostra": {
+    "name": "Mindre korsnäbb",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Loxia bifasciata": {
+    "name": "Bändelkorsnäbb",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Carduelis carduelis": {
+    "name": "Steglits",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Serinus serinus": {
+    "name": "Gulhämpling",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Spinus spinus": {
+    "name": "Grönsiska",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Calcarius lapponicus": {
+    "name": "Lappsparv",
+    "clue": "Kort ödslig strof med rrrrrrr",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Plectrophenax nivalis": {
+    "name": "Snösparv",
+    "clue": "Kort och kvittrande ödslig strof",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Emberiza calandra": {
+    "name": "Kornsparv",
+    "clue": "Kort, gnisslande och accelererande metalliskt ljud",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Emberiza hortulana": {
+    "name": "Ortolansparv",
+    "clue": "Lik gulsparv men mer sry-sry-sry djy-djy",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Emberiza citrinella": {
+    "name": "Gulsparv",
+    "clue": "Räknar till sju, ibland",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Emberiza schoeniclus": {
+    "name": "Sävsparv",
+    "clue": "zri zri zri + kvitter",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Emberiza rustica": {
+    "name": "Videsparv",
+    "clue": "Snabb rörlig medellång fras",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Emberiza pusilla": {
+    "name": "Dvärgsparv",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  }
+}

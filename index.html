@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐦 Träna fågelsång</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="header-container">
+        <h1 class="page-title">Träna fågelsång</h1>
+    </div>
+    
+    <div class="container">
+        <div class="filters">
+            
+            <div><input type="checkbox" id="includeConfusion" /> Inkludera förväxlingsarter</div>
+            <div><input type="checkbox" id="excludeSure" /> Undvik arter du redan kan</div>
+
+            <div> 
+                <input type="checkbox" id="songonly" checked /> 
+                Spela bara sångläten
+                <span class="songTooltip">
+                    <i class="fas fa-info-circle info-icon"></i>
+                    <span class="songTooltiptext">
+                        Kryssa i om du vill slippa korta varningsläten etc.<br>
+                        Observera att vissa fåglar inte har sångläten.
+                        <span class="tooltipArrow"></span>
+                    </span>
+                </span>
+            </div>
+              
+            <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
+            <div style="display: flex; align-items: center;">
+                <input type="text" id="speciesInput" placeholder="Lägg till arter att träna på" style="flex: 1;">
+                <button id="resetButton" title="Återställ" style="margin-left: 10px;">
+                    <i class="fas fa-sync-alt"></i>  <!-- Ikon för återställning -->
+                </button>
+            </div>
+            
+            <div><p id="trainList"></p></div>
+        </div>
+
+        <div class="mitt">
+            <div><audio id="audioPlayer" controls></audio></div> 
+            <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
+            <div><button onclick="playRandomBird()">Träna på nytt läte</button></div>
+            <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
+            <div>
+                <button onclick="showClue()">Ledtråd</button>
+            </div>
+            <div>
+                <p id="clueText"></p> <!-- Visar ledtråden -->
+                <input type="text" id="customClueInput" placeholder="Skriv en egen ledtråd..." style="display:none;">
+            </div>
+            <div style="margin-top: 20px;"></div>  
+            <div id="guessResult" class="guess-result"></div> 
+            <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
+            <div id="speciesImage"></div>
+            <!--<div style="margin-top: 10px;"></div>   Extra utrymme -->
+            <div id="resultSpecies" class="result-species"></div>
+
+            <input type="text" id="guessInput" onkeyup="dropDown()" placeholder="Gissa..." title="Type in a name">
+            <div style="margin-top: 5px;"></div>
+            <ul id="guessUL"></ul> <!-- Dynamisk lista -->
+        </div>
+
+        <div class="statistics">
+            <div>
+                <p><strong style="font-size: 0.9em;">Statistik</strong></p>
+                <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
+            </div>
+            <div id="resultBar" style="margin-top: 10px; font-size: 0.9em;"></div>
+            <!-- <div><p>Antal gissningar: <span id="nbTries">0</span></p></div>
+            <div><p>Antal korrekta svar: <span id="nbCorrect">0</span></p></div> -->
+            <div id="streakContainer" style="display: none;"> <!-- Dold från början -->
+                <p style="font-size: 0.9em;">Antal rätt i rad: <span id="nbInRow">0</span></p>
+            </div>
+            <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
+            <canvas id="progressChart" width="300" height="150" style="margin-top: 20px;"></canvas>
+            <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
+            <div>
+                <p><strong style="font-size: 0.9em;">Hämta eller spara din data</strong></p>
+                <input type="file" id="uploadFileInput" accept=".json" />
+                <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
+            </div>
+            <div>
+                <div style="margin-top: 20px;"></div>  <!-- Extra utrymme -->
+                <button onclick="downloadBirdFacts()">Spara till dator</button>
+            </div>
+            <div style="margin-top: 20px;"></div>  <!-- Extra utrymme -->
+            <div style="margin-top: 40px; text-align: center;">
+                <button onclick="showInfoAlert()">ℹ</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSpecies = ""; // aktuell art , Latinskt namn
+        let nbTries = 0;
+        let nbCorrect = 0;
+        let streakCount= 0;
+
+        let birdFacts = {};
+        let artgrupper = {};
+        let trainList = [];
+        let guessList = [];
+        let birdImageList = [];
+
+        let progressChart;
+        let accuracyData = [];
+        let attemptLabels = [];
+
+        async function loadBirdImages() {
+            const response = await fetch('birdImages.json');
+            birdImageList = await response.json();
+        }
+
+        async function loadBirdFacts() {
+            const response = await fetch('birdFacts.json'); 
+            const temp = await response.json();
+            birdFacts = temp;
+        }
+        
+        async function loadArtgrupper() {  // Borde kanske ligga i birdFacts ?  för att enklare ändra och spara och hämta
+            const response = await fetch('artgrupper.txt');
+            const temp = await response.json();
+            artgrupper = temp;
+        }
+
+        async function init() {
+            await Promise.all([
+                loadBirdFacts(),
+                loadArtgrupper(),
+                loadBirdImages()
+            ]);
+            console.log("BirdFacts:", birdFacts);
+            console.log("Artgrupper:", artgrupper);
+            console.log("birdImageList:", birdImageList);
+
+            updateResultBar();
+        }
+
+        init();
+
+
+        document.getElementById("resetButton").addEventListener("click", resetLists); //Reset
+
+        document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById("guessUL").addEventListener("click", function(e) {
+                    if (e.target && e.target.tagName === "A") {
+                        e.preventDefault();
+                        const selectedGuess = e.target.textContent;
+
+                        document.getElementById("guessInput").value = selectedGuess;
+                    }
+                });
+            });
+        
+        document.getElementById("speciesInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {  // Kollar om användaren trycker på Enter i ändra träningslista
+                event.preventDefault();
+                findTrainList();
+            }
+        });
+
+        document.getElementById('customClueInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {  // Kollar om användaren trycker på Enter i Ledtråd
+                updateClue(); 
+            }
+        });
+
+        document.getElementById("uploadFileInput").addEventListener("change", function () {
+            loadBirdFactsFromFile(); // Ladda filen direkt när den väljs
+        });
+
+        function resetLists() {
+            trainList = [];
+            guessList = [];
+            document.getElementById("speciesInput").value = "";
+            document.getElementById("trainList").innerHTML = "";
+            document.getElementById("guessResult").textContent = "";
+            document.getElementById("guessResult").className = "guess-result";
+            document.getElementById("clueText").textContent = "";
+            document.getElementById("customClueInput").style.display = "none";
+            document.getElementById("guessInput").value = "";
+            document.getElementById("speciesImage").innerHTML = "";
+            document.getElementById("resultSpecies").textContent = "";
+            document.getElementById("audioPlayer").src = ""; // Stoppar ljudet
+                                
+            populateGuessList(); 
+        }
+                
+        function findTrainList() {
+            const query = document.getElementById('speciesInput').value.toLowerCase().trim();
+            const listDiv = document.getElementById('trainList');
+            const includeConfusionCheckbox = document.getElementById("includeConfusion");
+            let artgrupphittad = false;
+
+            listDiv.innerHTML = ""; // Rensa tidigare resultat
+            trainList = [];  
+
+            if (!query) return; 
+
+            if (!birdFacts || Object.keys(birdFacts).length === 0) {
+                console.error("❌ birdFacts är inte laddad eller tom!");
+                return;
+            }
+
+            const normalizedKeys = Object.keys(artgrupper).map(key => key.toLowerCase());
+  
+            let foundKey = normalizedKeys.find(key => key.split(' ').some(word => query.includes(word)));
+            if (foundKey) {
+                let speciesList = artgrupper[foundKey]; // Lista med arter från artgrupper
+                
+                                                        // Filtrera ut de arter som finns i birdFacts
+                for (const latinName of speciesList) {
+                    if (birdFacts.hasOwnProperty(latinName)) {
+                        trainList.push({ latin: latinName, swedish: birdFacts[latinName].name });
+                    }
+                }
+                artgrupphittad = true;
+            }   
+
+            if (!artgrupphittad) {
+                        // Gå igenom birdFacts och leta efter matchning
+                for (const latinName in birdFacts) {
+                    if (!birdFacts[latinName] || !birdFacts[latinName].name) {
+                        console.warn(`⚠️ Saknad 'name' för: ${latinName}`);
+                        continue;  // Hoppa över om det saknas
+                    }
+
+                    const swedishName = birdFacts[latinName].name.toLowerCase();
+                    const latinNameLower = latinName.toLowerCase();
+
+                    if (latinNameLower.includes(query) || swedishName.includes(query)) {
+                        trainList.push({ latin: latinName, swedish: birdFacts[latinName].name });
+                    }
+                }
+            }
+                             // Om includeConfusion är ikryssad, lägg till förväxlingsarter
+            if (includeConfusionCheckbox.checked) {
+                    const confusionSpecies = new Set();
+
+                    trainList.forEach(species => {
+                        const confusionList = birdFacts[species.latin]?.confusionSpecies;
+                        if (confusionList && Array.isArray(confusionList)) {
+                            confusionList.forEach(confusionLatin => {
+                                if (!trainList.some(s => s.latin === confusionLatin) && birdFacts[confusionLatin]) {
+                                    confusionSpecies.add(confusionLatin);
+                                }
+                            });
+                        }
+                    });
+
+                    // Lägg till de nya förväxlingsarterna i trainList
+                    confusionSpecies.forEach(latinName => {
+                        trainList.push({ latin: latinName, swedish: birdFacts[latinName].name });
+                    });
+                }
+
+            if (trainList.length === 0) {
+                listDiv.innerHTML = "<p>Inga matchningar hittades.</p>";
+                return;
+            }
+
+           // Skapa en lista med checkboxes
+            const excludeSureCheckbox = document.getElementById("excludeSure");
+            const form = document.createElement("form");
+            form.id = "trainListForm";
+
+            trainList.forEach(species => {
+                const label = document.createElement("label");
+                label.style.display = "block";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.value = species.latin;
+                
+                checkbox.checked = true;
+
+                label.appendChild(checkbox);
+
+                label.innerHTML += ` ${species.swedish} <i style="font-size: 0.8em;">${species.latin}</i>`;
+                label.style.fontSize = "0.9em"; // Svenska textens storlek
+
+                form.appendChild(label);
+            });
+
+            listDiv.appendChild(form);
+
+            setTimeout(() => {
+                document.querySelectorAll("#trainListForm input[type=checkbox]").forEach(checkbox => {
+                    const species = trainList.find(s => s.latin === checkbox.value); // Hitta arten
+                    
+                    if (species && excludeSureCheckbox.checked && birdFacts[species.latin]?.nbTries > 0) {
+                        const nbCorr = birdFacts[species.latin].nbCorrect;
+                        const nb = birdFacts[species.latin].nbTries; 
+                        checkbox.checked = nbCorr < 0.5 * nb;
+                    } else {
+                        checkbox.checked = true;
+                    }
+                });
+            }, 0);
+
+            // Skapa och lägg till "Spara söklistan"-knappen
+            const saveButton = document.createElement("button");
+            saveButton.textContent = "Spara till träningslistan";
+            saveButton.onclick = saveGuessList;
+            saveButton.style.marginTop = "10px"; 
+            listDiv.appendChild(saveButton);
+            
+        }
+
+        // Sparar de icheckade arterna i guessList
+        function saveGuessList() {
+            
+            const checkboxes = document.querySelectorAll("#trainListForm input[type='checkbox']:checked");
+
+            checkboxes.forEach(checkbox => {
+                if (!guessList.includes(checkbox.value)) {  // Kontrollera om arten redan finns
+                    guessList.push(checkbox.value);
+                }
+            });
+
+            document.getElementById("speciesInput").value = "";
+            populateGuessList();
+            updateResultBar()
+        }
+
+        async function playRandomBird() {
+            document.getElementById("guessResult").textContent = "";
+            document.getElementById("guessResult").className = "guess-result";
+            document.getElementById('clueText').textContent = ""; // suddar ev tidigare clue
+            document.getElementById('customClueInput').style.display = "none"; // Dölj inmatningsfältet
+            document.getElementById('guessInput').value = ""
+            document.getElementById('speciesImage').innerHTML = "";
+            document.getElementById('resultSpecies').textContent = "";
+            
+            if (!guessList || guessList.length === 0) { 
+                alert("Välj arter att träna på")
+                return; 
+            }
+            
+            
+            currentSpecies = guessList[Math.floor(Math.random() * guessList.length)]; // Ex: "Parus major"
+            const songOnly = document.getElementById('songonly').checked;
+            let query = `grp:birds+cnt:sweden+${currentSpecies}`;
+
+            if (currentSpecies === "Corvus monedula") {
+                query = `grp:birds+cnt:sweden+${"Coloeus monedula"}`;  // Språkförbistring latinska namn
+            }
+            if (currentSpecies === "Loxia bifasciata") {
+                query = `grp:birds+cnt:sweden+${"Loxia leucoptera"}`;  // Språkförbistring latinska namn
+            }
+
+            if (songOnly) { query += "+type:song"; }
+           
+            // hitta ljud till randomSpecies Xeno-canto
+            try {
+                const response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
+                const data = await response.json();
+
+                if (!data.recordings || data.recordings.length === 0) {
+                    alert("Inga ljudinspelningar hittades. Testa att avmarkera 'Spela bara sångläten'");
+                    return;
+                }
+
+                // Välj en slumpmässig inspelning från resultatet
+                const randomRecording = data.recordings[Math.floor(Math.random() * data.recordings.length)];
+
+                // spela upp ljudet
+                document.getElementById('audioPlayer').src = randomRecording.file;  // Ljudfilens URL
+                document.getElementById('audioPlayer').play();
+            } catch (error) {
+                console.error("Fel vid hämtning av ljudfil:", error);
+                alert("Det gick inte att hämta ljudfilen.");
+            }
+        }
+
+        function populateGuessList() {
+            const ul = document.getElementById("guessUL");
+            ul.innerHTML = ""; // Rensa listan
+
+            guessList.forEach(species => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = "#";
+                a.textContent = birdFacts[species].name;
+                a.onclick = function() {
+                    showGuessResult(species,birdFacts[species].name); // Uppdatera guessResult
+                };
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+        }
+
+        function dropDown() {
+            const input = document.getElementById("guessInput");
+            const filter = input.value.toUpperCase();
+            const ul = document.getElementById("guessUL");
+            const li = ul.getElementsByTagName("li");
+
+            for (let i = 0; i < li.length; i++) {
+                const txtValue = li[i].textContent || li[i].innerText;
+                li[i].style.display = txtValue.toUpperCase().includes(filter) ? "" : "none";
+            }
+        }
+
+
+        async function showGuessResult(speciesLat, speciesSV) {
+            const resultDiv = document.getElementById("guessResult");
+            const resultSpeciesDiv = document.getElementById("resultSpecies");
+            const imageDiv = document.getElementById("speciesImage"); 
+            let responseText;
+
+            const isCorrect = speciesLat.toLowerCase() === currentSpecies.toLowerCase();
+
+            nbTries += 1;
+            birdFacts[currentSpecies].nbTries += 1;
+
+            if (isCorrect) {
+                const correctResponses = [
+                    `🍀 Rätt!`,
+                    `🍀 Bra jobbat!`,
+                    `🍀 Exakt!`,
+                    `🍀 Helt rätt!`,
+                    `🍀 Snyggt!`,
+                    `🍀 Du har koll på`
+                ];
+                responseText = correctResponses[Math.floor(Math.random() * correctResponses.length)];
+                nbCorrect += 1;
+                birdFacts[currentSpecies].nbCorrect += 1;
+                streakCount += 1;
+            } else {
+                const incorrectResponses = [
+                    `❌ Fel!`,
+                    `❌ Inte riktigt!`,
+                    `❌ Nästan!`,
+                    `❌ Ojdå!`,
+                    `❌ Bättre lycka nästa gång!`
+                ];
+                responseText = incorrectResponses[Math.floor(Math.random() * incorrectResponses.length)];
+                streakCount = 0;
+                if (!birdFacts[currentSpecies].confusionSpecies.includes(speciesLat)) {
+                    birdFacts[currentSpecies].confusionSpecies.push(speciesLat);
+                    if (birdFacts[currentSpecies].confusionSpecies.length > 4) {
+                        birdFacts[currentSpecies].confusionSpecies.shift(); // tar bort den äldsta förväxlingsarten
+                    }
+                    //console.log("lagt till förväxlingsart: ", birdFacts[currentSpecies].confusionSpecies)
+                }
+                
+            }
+
+            updateResultBar()
+            updateChart();
+            resultDiv.textContent = responseText;
+          
+            await showSpeciesImage(birdFacts[currentSpecies].name);
+
+            // document.getElementById('nbTries').textContent = nbTries;
+            // document.getElementById('nbCorrect').textContent = nbCorrect;
+            const streakContainer = document.getElementById("streakContainer");
+            if (streakCount > 4) {
+                streakContainer.style.display = "block"; // Visa om > 5
+                document.getElementById('nbInRow').textContent = streakCount;
+            } else {
+                streakContainer.style.display = "none"; // Dölj annars
+            }
+            resultSpeciesDiv.innerHTML = `${birdFacts[currentSpecies].name} <em>${currentSpecies}</em>.`;  // Artnamn under bild Latinskt namn i kursiv stil
+
+            document.getElementById('guessInput').value = "" //nollställ gissa-rutan
+            dropDown();
+        }
+
+        async function showSpeciesImage(svName) {
+            const imageDiv = document.getElementById('speciesImage');
+
+            // 1. Leta efter matchande lokal bild i birdImageList
+            function escapeRegex(str) {
+                return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // skydda specialtecken
+            }
+
+            const safeSvName = escapeRegex(svName.trim());
+            const regex = new RegExp(`(^|[^a-zåäöA-ZÅÄÖ])${safeSvName}([^a-zåäöA-ZÅÄÖ]|$)`, 'i');
+
+            const matchingLocal = birdImageList.filter(filename => {
+                const name = filename.replace(/\.[^/.]+$/, ""); // ta bort filändelse
+                return regex.test(name);
+            });
+
+
+            // const matchingLocal = birdImageList.filter(filename =>
+            //     filename.toLowerCase().includes(svName.toLowerCase())
+            // );
+
+            if (matchingLocal.length > 0) {
+                const randomLocal = matchingLocal[Math.floor(Math.random() * matchingLocal.length)];
+                const localUrl = `birdPicts/${randomLocal}`;
+                imageDiv.innerHTML = `<img src="${localUrl}" alt="${svName}" style="max-width: 200px; border-radius: 10px;">`;
+                return;
+            }
+
+            // 2. Om ingen lokal bild hittades, hämta från webben
+            const imageUrl = await fetchRandomImage(svName);
+
+            if (imageUrl) {
+                imageDiv.innerHTML = `<img src="${imageUrl}" alt="${svName}" style="max-width: 200px; border-radius: 10px;">`;
+            } else {
+                imageDiv.innerHTML = "<p>Ingen bild tillgänglig.</p>";
+            }
+        }
+
+        async function fetchRandomImage(speciesSV) {
+            const API_KEY = "49566155-8922f41ce0098cddb78eed458"
+            const query = encodeURIComponent(speciesSV); 
+            const url = `https://pixabay.com/api/?key=${API_KEY}&q=${query}&lang=sv&image_type=photo&safesearch=true&per_page=10`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error("Misslyckades med att hämta bilder från Pixabay");
+                }
+                
+                const data = await response.json();
+                
+                const exactMatch = data.hits.filter(img => {
+                    return img.tags.toLowerCase().split(", ").some(tag => tag.includes(speciesSV.toLowerCase()));
+                });
+                
+                if (exactMatch.length > 0) {
+                    const randomImage = exactMatch[Math.floor(Math.random() * exactMatch.length)];
+                    return randomImage.previewURL; // Eller randomImage.webformatURL för större bild
+                } else {
+                    //console.warn("Inga bilder hittades för sökningen:", speciesSV);
+                    return null;
+                }
+            } catch (error) {
+                console.error("Fel vid hämtning av bild:", error);
+                return null;
+            }
+        }
+
+
+        async function showClue() {
+            const clueText = document.getElementById('clueText');
+            const customClueInput = document.getElementById('customClueInput');
+            customClueInput.value = ""
+            
+            if (!currentSpecies) {
+                clueText.textContent = "Lägg till arter först!";
+                return;
+            }
+
+            // visa ledtråd
+            const speciesInfo = birdFacts[currentSpecies];
+            if (speciesInfo && speciesInfo.clue) {
+                clueText.textContent = speciesInfo.clue;  // Visa den lagrade ledtråden från birdFacts
+            } else {
+                clueText.textContent = "Ingen ledtråd tillgänglig."; 
+            }
+                
+            customClueInput.style.display = "inline-block"; // Visa inmatningsfältet för ny ledtråd
+        }
+
+        async function updateClue() {
+            const customClueInput = document.getElementById('customClueInput').value.trim();
+
+            if (!currentSpecies || !customClueInput) { return; }
+
+            if (birdFacts[currentSpecies]) { birdFacts[currentSpecies].clue = customClueInput; }
+            document.getElementById('clueText').textContent = `Ledtråd uppdaterad: ${customClueInput}`;              
+        }
+
+        function loadBirdFactsFromFile() {
+            const fileInput = document.getElementById("uploadFileInput");
+            const file = fileInput.files[0]; // Hämta den valda filen
+
+            if (!file) {
+                alert("Välj en fil först!");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async function (event) {
+                try {
+                    birdFacts = JSON.parse(event.target.result); // Spara innehållet i variabeln
+                    alert("Fil med fågeldata har laddats in!");
+                } catch (error) {
+                    alert("Fel vid inläsning av JSON-filen.");
+                    console.error("JSON-parse-fel:", error);
+                }
+            };
+
+            reader.readAsText(file); // Läs in filen som text
+        }
+
+        function downloadBirdFacts() {
+            const dataStr = JSON.stringify(birdFacts, null, 2); // Format med indrag
+            const blob = new Blob([dataStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "birdFacts.json";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            URL.revokeObjectURL(url); // Rensa temporär URL
+        }
+
+        function showInfoAlert() {
+            alert(
+                "🕊️ Träna fågelsång\n\n" +
+                "Lyssna på fågelläten och gissa vilken art det är.\n" +
+                "Du kan välja ut arter att träna på \n" + 
+                "Du kan visa ledtrådar och skriva in dina egna. \n" +  
+                "Du kan spara din statistik och hämta den igen nästa gång.\n\n" +
+                "🎧 Ljud: xeno-canto\n🖼️ Bilder: Pixabay\n" +
+                ""
+            );
+        }
+
+        function updateResultBar() {
+            const bar = document.getElementById("resultBar");
+
+            if (nbTries === 0) {
+                bar.textContent = "Inga försök ännu."; // 🎯
+                return;
+            }
+
+            const percent = Math.round((nbCorrect / nbTries) * 100);
+            const totalBars = 10;
+            const filled = Math.round(percent / 10);
+            const empty = totalBars - filled;
+
+            bar.textContent = `Resultat: ${"▓".repeat(filled)}${"░".repeat(empty)} ${nbCorrect}/${nbTries} rätt`; // (${percent}%)
+        }
+
+        function updateChart() {
+            if (nbTries === 0) return;
+
+            const percent = Math.round((nbCorrect / nbTries) * 100);
+            accuracyData.push(percent);
+            attemptLabels.push(nbTries.toString());
+            if (accuracyData.length > 20) {
+                accuracyData.shift();
+                attemptLabels.shift();
+            }
+
+            if (!progressChart) {
+                const ctx = document.getElementById("progressChart").getContext("2d");
+                progressChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: attemptLabels,
+                        datasets: [{
+                            label: '% rätt',
+                            data: accuracyData,
+                            borderColor: 'green',
+                            backgroundColor: 'rgba(0,128,0,0.1)',
+                            tension: 0.3,
+                            fill: true,
+                            pointRadius: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                min: 0,
+                                max: 100,
+                                ticks: { stepSize: 20 },
+                                title: { display: true, text: "Träffsäkerhet (%)" }
+                            },
+                            x: {
+                                title: { display: true, text: "Antal försök" }
+                            }
+                        }
+                    }
+                });
+            } else {
+                progressChart.data.labels = attemptLabels;
+                progressChart.data.datasets[0].data = accuracyData;
+                progressChart.update();
+            }
+        }
+
+
+    </script>
+</body>
+</html>

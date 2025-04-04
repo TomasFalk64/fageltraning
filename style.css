@@ -1,0 +1,201 @@
+/* Grundläggande styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  justify-content: center;
+  background-color: #f4f4f4;
+}
+
+.guess-result {
+  min-height: 30px;  /* Se till att rutan alltid har höjd */
+  text-align: center;
+  font-size: 12px;
+  /* font-weight: bold; */
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: transparent !important;
+  /* background-color: #f4f4f4; Ljusgrå bakgrund för synlighet */
+}
+
+.result-species {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.correct {
+  color: green;
+  /* background-color: #d4edda;*/
+}
+
+.wrong {
+  color: red;
+  /* background-color: #f8d7da;*/
+}
+
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#resetListIcon:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.header-container {
+  display: grid;
+  text-align: center;
+}
+
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* Tre kolumner: filter, mitt, statistik */
+  gap: 20px; /* Avstånd mellan kolumner */
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+/* Generell styling för sektioner */
+.filters, .mitt, .statistics {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Se till att varje sektion fyller sin kolumn */
+.filters {
+  grid-column: 1;
+}
+
+.mitt {
+  grid-column: 2;
+  text-align: center;
+}
+
+.statistics {
+  grid-column: 3;
+}
+
+/* Anpassning för små skärmar */
+@media (max-width: 768px) {
+  .container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .filters, .mitt, .statistics {
+      width: 100%;
+  }
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+#guessInput {
+  
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 12px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#guessUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#guessUL li {
+  list-style: none; /* inga punkter visas */
+}
+
+#guessUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; 
+  background-color: #f6f6f6;
+  padding: 4px;
+  text-decoration: none;
+  font-size: 11px;
+  color: black;
+  display: block
+}
+
+#guessUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+
+/* .songTooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+  cursor: pointer;
+  color: #555;
+}
+
+.songTooltip .songTooltiptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+
+  position: absolute;
+  top: -5px;
+  left: 105%;
+  z-index: 1;
+}
+
+.songTooltip:hover .songTooltiptext {
+  visibility: visible;
+} */
+
+.songTooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.songTooltip .songTooltiptext {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  line-height: 1.4;
+  width: 220px;
+
+  /* Positionering */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* ovanför ikonen */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.songTooltip:hover .songTooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
