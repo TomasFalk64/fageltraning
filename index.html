@@ -73,7 +73,18 @@
             <!--<div style="margin-top: 10px;"></div>   Extra utrymme -->
             <div id="resultSpecies" class="result-species"></div>
 
-            <input type="text" id="guessInput" onkeyup="dropDown()" placeholder="Gissa..." title="Type in a name">
+            <!-- <div style="display: flex; align-items: center; margin-top: 5px;">  -->
+            <div style="display: flex; align-items: baseline; margin-top: 5px;">
+                <input type="text" id="guessInput"
+                    onkeyup="dropDown()"
+                    placeholder="Gissa..."
+                    title="Skriv ett namn"
+                    style="flex: 1; height: 28px; font-size: 13px; padding: 4px 8px;">             
+                <button id="resetGuessButton" title="Rensa gissningslista" style="margin-left: 10px;">
+                  <i class="fas fa-sync-alt"></i>
+                </button>
+
+            </div>
             <div style="margin-top: 5px;"></div>
             <ul id="guessUL"></ul> <!-- Dynamisk lista -->
         </div>
@@ -164,6 +175,7 @@
 
 
         document.getElementById("resetButton").addEventListener("click", resetLists); //Reset
+        document.getElementById("resetGuessButton").addEventListener("click", resetGuessList);
 
         document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("guessUL").addEventListener("click", function(e) {
@@ -719,6 +731,26 @@
             }
         }
 
+        function resetGuessList() {
+            guessList = [];
+            currentSpecies = "";
+
+            // Töm inputfält och resultat
+            document.getElementById("guessInput").value = "";
+            document.getElementById("guessResult").textContent = "";
+            document.getElementById("guessResult").className = "guess-result";
+            document.getElementById("resultSpecies").textContent = "";
+
+            // Töm bild, ljud, ledtrådar
+            document.getElementById("speciesImage").innerHTML = "";
+            document.getElementById("audioPlayer").src = ""; // Stoppar ljud
+            document.getElementById("clueText").textContent = "";
+            document.getElementById("customClueInput").style.display = "none";
+
+            // Töm gissningslistan visuellt
+            document.getElementById("guessUL").innerHTML = "";
+
+        }
 
     </script>
 </body>

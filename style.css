@@ -58,10 +58,11 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* Tre kolumner: filter, mitt, statistik */
+  grid-template-columns: 340px 380px 340px; /* Tre kolumner: filter, mitt, statistik */
   gap: 20px; /* Avstånd mellan kolumner */
-  width: 90%;
-  max-width: 1200px;
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
   margin-top: 20px;
 }
 
@@ -76,15 +77,18 @@ body {
 /* Se till att varje sektion fyller sin kolumn */
 .filters {
   grid-column: 1;
+
 }
 
 .mitt {
   grid-column: 2;
+  
   text-align: center;
 }
 
 .statistics {
   grid-column: 3;
+ 
 }
 
 /* Anpassning för små skärmar */
