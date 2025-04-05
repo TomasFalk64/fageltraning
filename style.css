@@ -218,17 +218,22 @@ body {
 }
 
 .green-button {
-  background-color: #b0c4de; /* gråblå */
+  background-color: #cdddee; /* #b0c4de;  gråblå */
   color: black;  /* #2d4a2d; */
   border: 2px solid #2d4a2d;
   padding: 3px 5px;
-  border-radius: 6px;
+  border-radius: 3px;
   cursor: pointer;
   font-weight: normal;
+  font-size: 0.8em;
   transition: background-color 0.3s;
 }
 
 .green-button:hover {
   background-color: #a2b9d3;
   border-color: #4a6c8c;
+}
+
+input[type="checkbox"].custom-checkbox {
+  accent-color:#8daee0;
 }
