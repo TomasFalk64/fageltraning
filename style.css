@@ -199,3 +199,36 @@ body {
   visibility: visible;
   opacity: 1;
 }
+
+.spinner {
+  border: 3px solid #ccc;
+  border-top: 3px solid #4CAF50;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.green-button {
+  background-color: #b0c4de; /* gråblå */
+  color: black;  /* #2d4a2d; */
+  border: 2px solid #2d4a2d;
+  padding: 3px 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: normal;
+  transition: background-color 0.3s;
+}
+
+.green-button:hover {
+  background-color: #a2b9d3;
+  border-color: #4a6c8c;
+}

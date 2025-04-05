@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐦 Träna fågelsång</title>
+    <title>Träna fågelsång</title> <!-- 🐦 -->
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -35,7 +35,7 @@
               
             <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
             <div style="display: flex; align-items: center;">
-                <input type="text" id="speciesInput" placeholder="Lägg till arter att träna på" style="flex: 1;">
+                <input type="text" id="speciesInput" placeholder="Sök arter att träna på" style="flex: 1;">
                 <button id="resetButton" title="Återställ" style="margin-left: 10px;">
                     <i class="fas fa-sync-alt"></i>  <!-- Ikon för återställning -->
                 </button>
@@ -47,7 +47,18 @@
         <div class="mitt">
             <div><audio id="audioPlayer" controls></audio></div> 
             <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
-            <div><button onclick="playRandomBird()">Träna på nytt läte</button></div>
+            
+            <!-- <div style="display: flex; align-items: center; gap: 10px;">
+                <button onclick="playRandomBird()">Träna på nytt läte</button>
+                <div id="loadingStatus" style="font-size: 0.9em;"></div>
+            </div> -->
+
+            <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px;">
+                <button onclick="playRandomBird()">Träna på nytt läte</button>
+                <span id="loadingStatus" style="font-size: 1em;"></span>
+            </div>
+
+
             <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
             <div>
                 <button onclick="showClue()">Ledtråd</button>
@@ -310,7 +321,8 @@
             const saveButton = document.createElement("button");
             saveButton.textContent = "Spara till träningslistan";
             saveButton.onclick = saveGuessList;
-            saveButton.style.marginTop = "10px"; 
+            saveButton.className = "green-button";
+            saveButton.style.marginTop = "10px";
             listDiv.appendChild(saveButton);
             
         }
@@ -344,6 +356,7 @@
                 alert("Välj arter att träna på")
                 return; 
             }
+            document.getElementById("loadingStatus").innerHTML = `<span class="spinner"></span>`;
             
             
             currentSpecies = guessList[Math.floor(Math.random() * guessList.length)]; // Ex: "Parus major"
@@ -371,13 +384,21 @@
 
                 // Välj en slumpmässig inspelning från resultatet
                 const randomRecording = data.recordings[Math.floor(Math.random() * data.recordings.length)];
+                //console.log("Aktuell ljudfil: ", randomRecording.file)
 
+                document.getElementById("audioPlayer").oncanplay = () => {
+                    const fileName = randomRecording.file.split("/").pop(); // t.ex. XC966257 - ...
+                    const xcId = `XC${randomRecording.id}`;
+                    document.getElementById("loadingStatus").innerHTML = `
+                        <span title="${xcId}" style="cursor: default;">🔊</span>`;
+                };
                 // spela upp ljudet
                 document.getElementById('audioPlayer').src = randomRecording.file;  // Ljudfilens URL
                 document.getElementById('audioPlayer').play();
             } catch (error) {
                 console.error("Fel vid hämtning av ljudfil:", error);
-                alert("Det gick inte att hämta ljudfilen.");
+                //alert("Det gick inte att hämta ljudfilen.");
+                document.getElementById("loadingStatus").innerHTML = `⚠️ Ingen ljudfil.`;
             }
         }
 
