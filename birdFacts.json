@@ -41,6 +41,13 @@
     "nbTries": 0,
     "nbCorrect": 0
   },
+  "Anser erythropus": {
+    "name": "Fjällgås",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
   "Anser fabalis": {
     "name": "Sädgås",
     "clue": "nasalt  ank eller ank-ank",
@@ -1665,6 +1672,13 @@
   },
   "Phylloscopus borealis": {
     "name": "Nordsångare",
+    "clue": "",
+    "confusionSpecies": [],
+    "nbTries": 0,
+    "nbCorrect": 0
+  },
+  "Locustella lanceolata": {
+    "name": "Träsksångare",
     "clue": "",
     "confusionSpecies": [],
     "nbTries": 0,

@@ -152,10 +152,15 @@
             birdFacts = temp;
         }
         
-        async function loadArtgrupper() {  // Borde kanske ligga i birdFacts ?  för att enklare ändra och spara och hämta
-            const response = await fetch('artgrupper.txt');
-            const temp = await response.json();
-            artgrupper = temp;
+        // async function loadArtgrupper() {  // Borde kanske ligga i birdFacts ?  för att enklare ändra och spara och hämta
+        //     const response = await fetch('artgrupper.txt');
+        //     const temp = await response.json();
+        //     artgrupper = temp;
+        // }
+
+        async function loadArtgrupper() {
+            const response = await fetch('artgrupper.json'); 
+            artgrupper = await response.json(); 
         }
 
         async function init() {
@@ -166,7 +171,7 @@
             ]);
             console.log("BirdFacts:", birdFacts);
             console.log("Artgrupper:", artgrupper);
-            console.log("birdImageList:", birdImageList);
+           //console.log("birdImageList:", birdImageList);
 
             updateResultBar();
         }
@@ -241,17 +246,37 @@
             const normalizedKeys = Object.keys(artgrupper).map(key => key.toLowerCase());
   
             let foundKey = normalizedKeys.find(key => key.split(' ').some(word => query.includes(word)));
-            if (foundKey) {
-                let speciesList = artgrupper[foundKey]; // Lista med arter från artgrupper
+            // if (foundKey) {
+            //     let speciesList = artgrupper[foundKey]; // Lista med arter från artgrupper
                 
-                                                        // Filtrera ut de arter som finns i birdFacts
-                for (const latinName of speciesList) {
-                    if (birdFacts.hasOwnProperty(latinName)) {
-                        trainList.push({ latin: latinName, swedish: birdFacts[latinName].name });
+            //                                             // Filtrera ut de arter som finns i birdFacts
+            //     for (const latinName of speciesList) {
+            //         if (birdFacts.hasOwnProperty(latinName)) {
+            //             trainList.push({ latin: latinName, swedish: birdFacts[latinName].name });
+            //         }
+            //     }
+            //     artgrupphittad = true;
+            // }   
+
+            if (foundKey) {
+                const speciesList = artgrupper[foundKey]; // Lista med svenska artnamn
+
+                for (const swedishName of speciesList) {
+                    // Slå upp latinskt namn via birdFacts
+                    const latinName = Object.keys(birdFacts).find(
+                        key => birdFacts[key].name === swedishName
+                    );
+
+                    if (latinName) {
+                        trainList.push({ latin: latinName, swedish: swedishName });
+                    } else {
+                        console.warn(`⚠️ Hittade inte latinskt namn för: ${swedishName}`);
                     }
                 }
+
                 artgrupphittad = true;
-            }   
+            }
+
 
             if (!artgrupphittad) {
                         // Gå igenom birdFacts och leta efter matchning
@@ -378,7 +403,13 @@
             
             currentSpecies = guessList[Math.floor(Math.random() * guessList.length)]; // Ex: "Parus major"
             const songOnly = document.getElementById('songonly').checked;
-            let query = `grp:birds+cnt:sweden+${currentSpecies}`;
+
+            const nordicCountries = ["sweden"]; //["sweden",""];
+            const randomCountry = nordicCountries[Math.floor(Math.random() * nordicCountries.length)];
+            let query = `grp:birds+cnt:${randomCountry}+${currentSpecies}`;
+            if (randomCountry == "") {
+                query = `grp:birds+${currentSpecies}`;
+            }
 
             if (currentSpecies === "Corvus monedula") {
                 query = `grp:birds+cnt:sweden+${"Coloeus monedula"}`;  // Språkförbistring latinska namn
@@ -391,8 +422,7 @@
            
             // hitta ljud till randomSpecies Xeno-canto
             try {
-                const response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
-                const data = await response.json();
+                const data = await fetchRecordings(currentSpecies, songOnly);
 
                 if (!data.recordings || data.recordings.length === 0) {
                     alert("Inga ljudinspelningar hittades. Testa att avmarkera 'Spela bara sångläten'");
@@ -401,7 +431,11 @@
 
                 // Välj en slumpmässig inspelning från resultatet
                 const randomRecording = data.recordings[Math.floor(Math.random() * data.recordings.length)];
-                //console.log("Aktuell ljudfil: ", randomRecording.file)
+                console.log("art:", birdFacts[currentSpecies].name);
+                console.log("Söker efter:", currentSpecies, "i", randomCountry || "hela världen");
+                console.log("Antal ljudfiler:", data.recordings.length);
+                console.log("Totalt antal träffar:", data.numRecordings);
+                console.log("Antal sidor:", data.numPages);
 
                 document.getElementById("audioPlayer").oncanplay = () => {
                     const fileName = randomRecording.file.split("/").pop(); // t.ex. XC966257 - ...
@@ -417,6 +451,27 @@
                 //alert("Det gick inte att hämta ljudfilen.");
                 document.getElementById("loadingStatus").innerHTML = `⚠️ Ingen ljudfil.`;
             }
+        }
+
+        async function fetchRecordings(currentSpecies, songOnly) {
+            const country = "sweden";
+            let query = `grp:birds+cnt:${country}+${currentSpecies}`;
+            if (songOnly) query += "+type:song";
+
+            let response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
+            let data = await response.json();
+
+            let minAntal = 50
+            if (!data.recordings || data.recordings.length < minAntal) {
+                console.log(`${birdFacts[currentSpecies].name}: Färre än ${minAntal} i Sverige, försöker utan landfilter...`);
+                query = `grp:birds+${currentSpecies}`;
+                if (songOnly) query += "+type:song";
+
+                response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
+                data = await response.json();
+            }
+
+            return data;
         }
 
         function populateGuessList() {
