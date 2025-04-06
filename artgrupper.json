@@ -54,7 +54,7 @@
     "Vitkindad gås",
     "Årta"
   ],
-  "änder andfåglar": [
+  "änder": [
     "Alfågel",
     "Alförrädare",
     "Bergand",
@@ -89,7 +89,62 @@
     "Vigg",
     "Årta"
   ],
-  "hönsfåglar höns fälthöns": [
+  "andfåglar": [
+    "Alfågel",
+    "Alförrädare",
+    "Bergand",
+    "Bläsand",
+    "Brunand",
+    "Ejder",
+    "Gravand",
+    "Gräsand",
+    "Gråhakedopping",
+    "Knipa",
+    "Kricka",
+    "Mandarinand",
+    "Mindre sumphöna",
+    "Praktejder",
+    "Rostand",
+    "Rörhöna",
+    "Salskrake",
+    "Sjöorre",
+    "Skedand",
+    "Skäggdopping",
+    "Smådopping",
+    "Småfläckig sumphöna",
+    "Smålom",
+    "Småskrake",
+    "Snatterand",
+    "Sothöna",
+    "Stjärtand",
+    "Storlom",
+    "Storskrake",
+    "Svarthakedopping",
+    "Svärta",
+    "Vigg",
+    "Årta"
+  ],
+  "hönsfåglar": [
+    "Dalripa",
+    "Fasan",
+    "Fjällripa",
+    "Järpe",
+    "Orre",
+    "Rapphöna",
+    "Tjäder",
+    "Vaktel"
+  ],
+  "höns": [
+    "Dalripa",
+    "Fasan",
+    "Fjällripa",
+    "Järpe",
+    "Orre",
+    "Rapphöna",
+    "Tjäder",
+    "Vaktel"
+  ],
+  "fälthöns": [
     "Dalripa",
     "Fasan",
     "Fjällripa",
@@ -134,7 +189,23 @@
     "Tofsvipa",
     "Tuvsnäppa"
   ],
-  "måsar måsfåglar": [
+  "måsar": [
+    "Dvärgmås",
+    "Fiskmås",
+    "Fisktärna",
+    "Fjällabb",
+    "Gråtrut",
+    "Havstrut",
+    "Kustlabb",
+    "Silltrut",
+    "Silvertärna",
+    "Skrattmås",
+    "Skräntärna",
+    "Svarttärna",
+    "Tretåig mås",
+    "Vittrut"
+  ],
+  "måsfåglar": [
     "Dvärgmås",
     "Fiskmås",
     "Fisktärna",
@@ -186,7 +257,17 @@
     "Tretåig hackspett",
     "Vitryggig hackspett"
   ],
-  "kråkor kråkfåglar": [
+  "kråkor": [
+    "Gråkråka",
+    "Kaja",
+    "Korp",
+    "Lavskrika",
+    "Nötkråka",
+    "Nötskrika",
+    "Råka",
+    "Skata"
+  ],
+  "kråkfåglar": [
     "Gråkråka",
     "Kaja",
     "Korp",
@@ -272,7 +353,7 @@
     "Videsparv",
     "Vinterhämpling"
   ],
-  "Trastar": [
+  "trastar": [
     "Björktrast",
     "Dubbeltrast",
     "Koltrast",
@@ -280,7 +361,7 @@
     "Rödvingetrast",
     "Taltrast"
   ],
-  "stad stadsmiljö": [
+  "stad": [
     "Björktrast",
     "Blåmes",
     "Bofink",
@@ -301,7 +382,7 @@
     "Tornseglare",
     "Turkduva"
   ],
-  "åker åkermark": [
+  "åker": [
     "Bofink",
     "Buskskvätta",
     "Gulsparv",
@@ -319,7 +400,7 @@
     "Törnskata",
     "Ängspiplärka"
   ],
-  "hage hagmarker äng": [
+  "hage": [
     "Björktrast",
     "Blåmes",
     "Bofink",
@@ -352,7 +433,21 @@
     "Törnsångare",
     "Ärtsångare"
   ],
-  "vass vassjö": [
+  "vass": [
+    "Brun kärrhök",
+    "Gråhäger",
+    "Rördrom",
+    "Rörhöna",
+    "Rörsångare",
+    "Skrattmås",
+    "Skäggmes",
+    "Sothöna",
+    "Sävsparv",
+    "Sävsångare",
+    "Vassångare",
+    "Vattenrall"
+  ],
+  "vassjö": [
     "Brun kärrhök",
     "Gråhäger",
     "Rördrom",
@@ -388,7 +483,7 @@
     "Vassångare",
     "Vigg"
   ],
-  "fjäll fjällen": [
+  "fjäll": [
     "Alfågel",
     "Bergand",
     "Bergfink",
@@ -416,7 +511,7 @@
     "Större strandpipare",
     "Ängspiplärka"
   ],
-  "myr mosse": [
+  "myr": [
     "Bergfink",
     "Bläsand",
     "Brushane",
@@ -446,7 +541,7 @@
     "Vigg",
     "Ängspiplärka"
   ],
-  "skog skogar barrskog blandskog": [
+  "skog": [
     "Bergfink",
     "Blåmes",
     "Bofink",
@@ -487,7 +582,7 @@
     "Trädgårdssångare",
     "Trädpiplärka"
   ],
-  "berg brant branter klippor": [
+  "berg": [
     "Korp",
     "Kungsörn",
     "Råka",
@@ -496,7 +591,25 @@
     "Tornfalk",
     "Trädlärka"
   ],
-  "strand stränder sanddyn": [
+  "brant": [
+    "Korp",
+    "Kungsörn",
+    "Råka",
+    "Rödstjärt",
+    "Stenskvätta",
+    "Tornfalk",
+    "Trädlärka"
+  ],
+  "klippor": [
+    "Korp",
+    "Kungsörn",
+    "Råka",
+    "Rödstjärt",
+    "Stenskvätta",
+    "Tornfalk",
+    "Trädlärka"
+  ],
+  "strand": [
     "Drillsnäppa",
     "Fisktärna",
     "Gråhäger",
@@ -510,7 +623,35 @@
     "Strandskata",
     "Större strandpipare"
   ],
-  "hav havsstrand kust skärgård": [
+  "stränder": [
+    "Drillsnäppa",
+    "Fisktärna",
+    "Gråhäger",
+    "Gråtrut",
+    "Kärrsnäppa",
+    "Mindre strandpipare",
+    "Roskarl",
+    "Sandlöpare",
+    "Silvertärna",
+    "Småsnäppa",
+    "Strandskata",
+    "Större strandpipare"
+  ],
+  "sanddyn": [
+    "Drillsnäppa",
+    "Fisktärna",
+    "Gråhäger",
+    "Gråtrut",
+    "Kärrsnäppa",
+    "Mindre strandpipare",
+    "Roskarl",
+    "Sandlöpare",
+    "Silvertärna",
+    "Småsnäppa",
+    "Strandskata",
+    "Större strandpipare"
+  ],
+  "hav": [
     "Ejder",
     "Fiskmås",
     "Fisktärna",
@@ -526,5 +667,70 @@
     "Skrattmås",
     "Tobisgrissla",
     "Tordmule"
+  ],
+  "havsstrand": [
+    "Ejder",
+    "Fiskmås",
+    "Fisktärna",
+    "Gråtrut",
+    "Havstrut",
+    "Kentsk tärna",
+    "Lunnefågel",
+    "Praktejder",
+    "Sillgrissla",
+    "Silltrut",
+    "Silvertärna",
+    "Sjöorre",
+    "Skrattmås",
+    "Tobisgrissla",
+    "Tordmule"
+  ],
+  "kust": [
+    "Ejder",
+    "Fiskmås",
+    "Fisktärna",
+    "Gråtrut",
+    "Havstrut",
+    "Kentsk tärna",
+    "Lunnefågel",
+    "Praktejder",
+    "Sillgrissla",
+    "Silltrut",
+    "Silvertärna",
+    "Sjöorre",
+    "Skrattmås",
+    "Tobisgrissla",
+    "Tordmule"
+  ],
+  "skärgård": [
+    "Ejder",
+    "Fiskmås",
+    "Fisktärna",
+    "Gråtrut",
+    "Havstrut",
+    "Kentsk tärna",
+    "Lunnefågel",
+    "Praktejder",
+    "Sillgrissla",
+    "Silltrut",
+    "Silvertärna",
+    "Sjöorre",
+    "Skrattmås",
+    "Tobisgrissla",
+    "Tordmule"
+  ],
+  "gäss": [
+    "Bläsgås",
+    "Grågås",
+    "Fjällgås",
+    "Kanadagås",
+    "Nilgås",
+    "Prutgås",
+    "Rödhalsad gås",
+    "Prutgås",
+    "Spetsbergsgås",
+    "Stripgås",
+    "Sädgås",
+    "Vitkindad gås"
   ]
 }
