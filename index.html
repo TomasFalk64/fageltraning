@@ -419,13 +419,17 @@
                     return;
                 }
                 currentSpeciesSex = randomRecording.sex
-                
+
                 document.getElementById("audioPlayer").oncanplay = () => {
                     const xcId = `XC${randomRecording.id}`;
                     const recordist = randomRecording.rec || "okänd inspelare";
 
+                    // document.getElementById("loadingStatus").innerHTML = `
+                    //     <span title="${xcId} – ${recordist}" style="cursor: default;">🔊</span>`;
                     document.getElementById("loadingStatus").innerHTML = `
-                        <span title="${xcId} – ${recordist}" style="cursor: default;">🔊</span>`;
+                        <span title="Inspelning: ${xcId} – ${recordist}\nKlicka för att öppna i Xeno-Canto">
+                            <a href="https://xeno-canto.org/${randomRecording.id}" target="_blank" style="text-decoration: none; color: inherit;">🔊</a>
+                        </span>`;
                 };
                 // spela upp ljudet
                 document.getElementById('audioPlayer').src = randomRecording.file;  // Ljudfilens URL
