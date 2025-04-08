@@ -124,6 +124,7 @@
 
     <script>
         let currentSpecies = ""; // aktuell art , Latinskt namn
+        let currentSpeciesSex = "";
         let nbTries = 0;
         let nbCorrect = 0;
         let streakCount= 0;
@@ -412,12 +413,13 @@
 
             try {
                 const randomRecording = await fetchRecording(currentSpecies, songOnly);
-
+                
                 if (!randomRecording) {
                     alert("Inga ljudinspelningar hittades. Testa att avmarkera 'Spela bara sångläten'");
                     return;
                 }
-
+                currentSpeciesSex = randomRecording.sex
+                
                 document.getElementById("audioPlayer").oncanplay = () => {
                     const xcId = `XC${randomRecording.id}`;
                     const recordist = randomRecording.rec || "okänd inspelare";
@@ -573,7 +575,7 @@
             } else {
                 streakContainer.style.display = "none"; // Dölj annars
             }
-            resultSpeciesDiv.innerHTML = `${birdFacts[currentSpecies].name} <em>${currentSpecies}</em>.`;  // Artnamn under bild Latinskt namn i kursiv stil
+            resultSpeciesDiv.innerHTML = `${birdFacts[currentSpecies].name} <em>${currentSpecies}</em> ${getSexSymbol(currentSpeciesSex)}`;  // Artnamn under bild Latinskt namn i kursiv stil
 
             document.getElementById('guessInput').value = "" //nollställ gissa-rutan
             dropDown();
@@ -799,6 +801,7 @@
         function resetGuessList() {
             guessList = [];
             currentSpecies = "";
+            currentSpeciesSex = "";
 
             // Töm inputfält och resultat
             document.getElementById("guessInput").value = "";
@@ -815,6 +818,12 @@
             // Töm gissningslistan visuellt
             document.getElementById("guessUL").innerHTML = "";
 
+        }
+
+        function getSexSymbol(sex) {
+            if (sex === "male") return "♂";
+            if (sex === "female") return "♀";
+            return "";
         }
 
     </script>
