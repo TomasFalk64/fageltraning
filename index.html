@@ -20,16 +20,40 @@
             <div><input type="checkbox" id="includeConfusion" class="custom-checkbox" /> Inkludera förväxlingsarter</div>
             <div><input type="checkbox" id="excludeSure" class="custom-checkbox" /> Undvik arter du redan kan</div>
             <div> 
-                <input type="checkbox" id="songonly" class="custom-checkbox" checked /> 
-                Spela bara sångläten
-                <span class="songTooltip">
-                    <i class="fas fa-info-circle info-icon"></i>
-                    <span class="songTooltiptext">
-                        Kryssa i om du vill slippa korta varningsläten etc.<br>
-                        Observera att vissa fåglar inte har sångläten.
-                        <span class="tooltipArrow"></span>
-                    </span>
-                </span>
+                <!-- <input type="checkbox" id="songonly" class="custom-checkbox" checked /> 
+                Spela bara sångläten -->
+                <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
+                <div>
+                    <div id="soundTags" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+                      <button class="tag-button selected" data-type="song">
+                        <span class="checkmark">✓</span> Sång <span class="filler">&nbsp;</span>
+                      </button>
+                      <button class="tag-button" data-type="alarm call">
+                        <span class="checkmark">✓</span> Varningsläte <span class="filler">&nbsp;</span>
+                      </button>
+                      <button class="tag-button" data-type="call">
+                        <span class="checkmark">✓</span> Kontaktläte <span class="filler">&nbsp;</span>
+                      </button>
+                      <button class="tag-button" data-type="flight call">
+                        <span class="checkmark">✓</span> Flyktläte <span class="filler">&nbsp;</span>
+                      </button>
+                      <button class="tag-button" data-type="drumming">
+                        <span class="checkmark">✓</span> Trumning <span class="filler">&nbsp;</span>
+                      </button>
+                  
+                      
+                      <div style="width: 30px;"></div>  <!--  mellanrum efter sista knappen -->
+                        <span class="songTooltip">
+                            <i class="fas fa-info-circle info-icon" onclick="showInfoAlert()"></i>
+                            <span class="songTooltiptext">
+                                Välj sång om du vill slippa korta varningsläten etc.<br>
+                                Trumning kan vara ett bra val för hacspettar.<br>
+                                Observera att vissa fåglar inte har sångläten.
+                                <span class="tooltipArrow"></span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
             </div>
               
             <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
@@ -116,6 +140,11 @@
         </div>
     </div>
 
+    <div id="customAlert" class="custom-alert" style="display: none;">
+        <span id="customAlertText"></span>
+        <button onclick="hideCustomAlert()">OK</button>
+    </div>
+
     <footer style="text-align: center; margin-top: 40px; font-size: 0.85em; opacity: 0.7;">
         <a href="https://www.freecounterstat.com" target="_blank" title="Page counter">
           <img src="https://counter4.optistats.ovh/private/freecounterstat.php?c=nkcezkqp3d8nx5scumkwlsas73l7htgp" border="0" alt="Page counter" />
@@ -123,15 +152,7 @@
     </footer>
 
     <script>
-        let searchStats = {}; // Local storage statistik om sökningar
-        const storedStats = localStorage.getItem("searchStats");
-        if (storedStats) {
-            try {
-                searchStats = JSON.parse(storedStats);
-            } catch (e) {
-                console.warn("Kunde inte läsa searchStats från localStorage:", e);
-            }
-        }
+        let searchHistory = [];
 
         let currentSpecies = ""; // aktuell art , Latinskt namn
         let currentSpeciesSex = "";
@@ -177,7 +198,7 @@
             ]);
             console.log("BirdFacts:", birdFacts);
             console.log("Artgrupper:", artgrupper);
-           //console.log("birdImageList:", birdImageList);
+            //console.log("birdImageList:", birdImageList);
 
             updateResultBar();
         }
@@ -215,6 +236,13 @@
         document.getElementById("uploadFileInput").addEventListener("change", function () {
             loadBirdFactsFromFile(); // Ladda filen direkt när den väljs
         });
+
+        document.querySelectorAll('#soundTags .tag-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('selected');
+            });
+        });
+
 
         function resetLists() {
             trainList = [];
@@ -418,21 +446,24 @@
             document.getElementById('resultSpecies').textContent = "";
             
             if (!guessList || guessList.length === 0) { 
-                alert("Välj arter att träna på")
+                showCustomAlert("Välj arter att träna på")
                 return; 
             }
             document.getElementById("loadingStatus").innerHTML = `<span class="spinner"></span>`;
             
             
             currentSpecies = guessList[Math.floor(Math.random() * guessList.length)]; // Ex: "Parus major"
-            const songOnly = document.getElementById('songonly').checked;
+            //const songOnly = document.getElementById('songonly').checked;  //NNN
 
             try {
-                const randomRecording = await fetchRecording(currentSpecies, songOnly);
+                // const randomRecording = await fetchRecording(currentSpecies, songOnly); // NNN
+                // const randomRecording = await fetchRecording(currentSpecies);
+                const selectedTypes = getSelectedSoundTypes(); // t.ex. ["song", "call"]
+                const randomRecording = await fetchRecording(currentSpecies, selectedTypes);
                 
                 if (!randomRecording) {
                     document.getElementById("loadingStatus").innerHTML = "";
-                    alert("Inga ljudinspelningar hittades. Testa att avmarkera 'Spela bara sångläten'");
+                    showCustomAlert("Inga ljudinspelningar hittades. Prova att avmarkera alla ljudtyper");
                     return;
                 }
 
@@ -458,13 +489,16 @@
             }
         }
 
-        async function fetchRecording(currentSpecies, songOnly) {
+        async function fetchRecording(currentSpecies, selectedTypes = ["song"]) {
             const speciesOverride = {
                 "Corvus monedula": "Coloeus monedula",
                 "Loxia bifasciata": "Loxia leucoptera"
             };
             const lookupSpecies = speciesOverride[currentSpecies] || currentSpecies;
-            const cacheKey = currentSpecies + (songOnly ? "_song" : "_all");
+            // const cacheKey = currentSpecies + (songOnly ? "_song" : "_all");
+            // Bygg cacheKey beroende på valda typer
+            const typeKey = selectedTypes.length > 0 ? selectedTypes.join("_") : "all";
+            const cacheKey = currentSpecies + "_" + typeKey;
 
                 // ✅ Kolla cache först
             if (soundCache[cacheKey]?.length > 0) {
@@ -477,9 +511,15 @@
             const minAntal = 20; // Försök hitta 20 i Norden annars världen
             let allRecordings = [];
 
+            const typeQuery = selectedTypes.length > 0
+                ? selectedTypes.map(t => `type:${t}`).join(" OR ")
+                : "";
+
             for (const country of countries) {      // sök i norden
+                // let query = `grp:birds+cnt:${country}+${lookupSpecies}`;
+                // if (songOnly) query += "+type:song";
                 let query = `grp:birds+cnt:${country}+${lookupSpecies}`;
-                if (songOnly) query += "+type:song";
+                if (typeQuery) query += "+" + typeQuery.replace(/\s+/g, "+");
 
                 const response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
                 const data = await response.json();
@@ -493,8 +533,10 @@
             }
 
             if (allRecordings.length < minAntal) {  // Sök i hela världen om färre än minAntal
+                // let query = `grp:birds+${lookupSpecies}`;
+                // if (songOnly) query += "+type:song";
                 let query = `grp:birds+${lookupSpecies}`;
-                if (songOnly) query += "+type:song";
+                if (typeQuery) query += "+" + typeQuery.replace(/\s+/g, "+");
 
                 const response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
                 const data = await response.json();
@@ -502,12 +544,14 @@
                 if (data.recordings?.length > 0) {
                     allRecordings = allRecordings.concat(data.recordings);
                     //console.log(`🌍 Hittade ${data.recordings.length} globala inspelningar`);
-                    addToSoundCache(currentSpecies, data.recordings, songOnly); // Spara artens ljudinspelningar i soundCache
+                    //addToSoundCache(currentSpecies, data.recordings, songOnly); // Spara artens ljudinspelningar i soundCache
+                    addToSoundCache(currentSpecies, data.recordings, typeKey);
                 }
             } else {
                 // ✅ Lägg till nordiska om få i cache
                 if (allRecordings.length > 0 && soundCacheOrder.length < maxCacheSize) {
-                    addToSoundCache(currentSpecies, allRecordings, songOnly);
+                    // addToSoundCache(currentSpecies, allRecordings, songOnly);
+                    addToSoundCache(currentSpecies, allRecordings, typeKey);
                 }
             }
             
@@ -622,33 +666,64 @@
             const imageDiv = document.getElementById('speciesImage');
 
             // 1. Leta efter matchande lokal bild i birdImageList
-            function escapeRegex(str) {
-                return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // skydda specialtecken
+            // function escapeRegex(str) {
+            //     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // skydda specialtecken
+            // }
+
+            // const safeSvName = escapeRegex(svName.trim());
+            // const regex = new RegExp(`(^|[^a-zåäöA-ZÅÄÖ])${safeSvName}([^a-zåäöA-ZÅÄÖ]|$)`, 'i');
+
+            // const matchingLocal = birdImageList.filter(filename => {
+            //     const name = filename.replace(/\.[^/.]+$/, ""); // ta bort filändelse
+            //     return regex.test(name);
+            // });
+
+            function normalizeName(name) {
+                return name
+                    .toLowerCase()
+                    .replace(/[åä]/g, 'a')
+                    .replace(/ö/g, 'o')
+                    .replace(/[\s_0-9]+/g, '');
             }
 
-            const safeSvName = escapeRegex(svName.trim());
-            const regex = new RegExp(`(^|[^a-zåäöA-ZÅÄÖ])${safeSvName}([^a-zåäöA-ZÅÄÖ]|$)`, 'i');
-
+            const normalizedSvName = normalizeName(svName);
+            
             const matchingLocal = birdImageList.filter(filename => {
-                const name = filename.replace(/\.[^/.]+$/, ""); // ta bort filändelse
-                return regex.test(name);
+                const nameWithoutExt = filename.replace(/\.[^/.]+$/, "");
+                const normalizedFile = normalizeName(nameWithoutExt);
+                return normalizedFile.includes(normalizedSvName);
             });
 
+            console.log("Bild " , svName, normalizedSvName, matchingLocal );
 
             if (matchingLocal.length > 0) {
                 const randomLocal = matchingLocal[Math.floor(Math.random() * matchingLocal.length)];
                 const localUrl = `birdPicts/${randomLocal}`;
-                imageDiv.innerHTML = `<img src="${localUrl}" alt="${svName}" style="max-width: 200px; border-radius: 10px;">`;
+                imageDiv.innerHTML = `<img src="${localUrl}" alt="${svName}" style="max-width: 180px; border-radius: 10px;">`;
                 return;
             }
 
-            // 2. Om ingen lokal bild hittades, hämta från webben
-            const imageUrl = await fetchRandomImage(svName);
+            // Visa fallback-bild, annars hämta från webben
+            const localFallback = 'birdPicts/Bild_saknas.webp';
 
-            if (imageUrl) {
-                imageDiv.innerHTML = `<img src="${imageUrl}" alt="${svName}" style="max-width: 200px; border-radius: 10px;">`;
-            } else {
-                imageDiv.innerHTML = "<p>Ingen bild tillgänglig.</p>";
+            try {
+                const response = await fetch(localFallback, { method: 'HEAD' });
+
+                if (response.ok) {
+                    imageDiv.innerHTML = `<img src="${localFallback}" style="max-width: 150px; border-radius: 10px;">`;
+                } else {
+                    // Fallback-bild finns inte, hämta från nätet
+                    const imageUrl = await fetchRandomImage(svName);
+
+                    if (imageUrl) {
+                        imageDiv.innerHTML = `<img src="${imageUrl}" alt="${svName}" style="max-width: 180px; border-radius: 10px;">`;
+                    } else {
+                        imageDiv.innerHTML = "<p>Ingen bild tillgänglig.</p>";
+                    }
+                }
+            } catch (error) {
+                console.error("Fel vid bildhämtning:", error);
+                imageDiv.innerHTML = "<p>Kunde inte ladda bilden.</p>";
             }
         }
 
@@ -718,7 +793,7 @@
             const file = fileInput.files[0]; // Hämta den valda filen
 
             if (!file) {
-                alert("Välj en fil först!");
+                showCustomAlert("Välj en fil först!");
                 return;
             }
 
@@ -726,9 +801,9 @@
             reader.onload = async function (event) {
                 try {
                     birdFacts = JSON.parse(event.target.result); // Spara innehållet i variabeln
-                    alert("Fil med fågeldata har laddats in!");
+                    showCustomAlert("Fil med fågeldata har laddats in!");
                 } catch (error) {
-                    alert("Fel vid inläsning av JSON-filen.");
+                    showCustomAlert("Fel vid inläsning av JSON-filen.");
                     console.error("JSON-parse-fel:", error);
                 }
             };
@@ -752,7 +827,7 @@
         }
 
         function showInfoAlert() {
-            alert(
+            showCustomAlert(
                 "🕊️ Träna fågelsång\n\n" +
                 "Lyssna på fågelläten och gissa vilken art det är.\n" +
                 "Du kan välja ut arter att träna på \n" + 
@@ -761,7 +836,6 @@
                 "🎧 Ljud: xeno-canto\n🖼️ Bilder: Pixabay\n" +
                 ""
             );
-            console.log("📊 Sökstatistik:", searchStats);
         }
 
         function updateResultBar() {
@@ -861,10 +935,11 @@
             return "";
         }
 
-        function addToSoundCache(species, recordings, songOnly) {
+        function addToSoundCache(species, recordings, typeKey) {
             if (!recordings || recordings.length === 0) return;
 
-            const cacheKey = species + (songOnly ? "_song" : "_all");
+            // const cacheKey = species + (songOnly ? "_song" : "_all");
+            const cacheKey = species + "_" + typeKey;
 
             if (soundCache[cacheKey]) {
                 // Ta bort gamla positionen i kön
@@ -882,18 +957,30 @@
                 delete soundCache[oldestSpecies];
                 //console.log(`🗑 Rensade cache för: ${oldestSpecies}`);
             }
+            console.log("Cache:", soundCache);
         }
 
         function trackSearch(query) {
             if (!query) return;
-
-            // Lägg till eller öka räknaren
-            searchStats[query] = (searchStats[query] || 0) + 1;
-
-            // Spara till localStorage
-            localStorage.setItem("searchStats", JSON.stringify(searchStats));
+            searchHistory.push(query);
+            //console.log("Sökhistorik: ", searchHistory)
         }
 
+        function getSelectedSoundTypes() {
+            const selected = document.querySelectorAll('#soundTags .tag-button.selected');
+            return Array.from(selected).map(btn => btn.dataset.type);
+        }
+
+        function showCustomAlert(message) {
+            const alertBox = document.getElementById("customAlert");
+            const alertText = document.getElementById("customAlertText");
+            alertText.innerText = message;
+            alertBox.style.display = "block";
+        }
+
+        function hideCustomAlert() {
+            document.getElementById("customAlert").style.display = "none";
+        }
 
     </script>
 </body>
