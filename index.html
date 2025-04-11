@@ -98,7 +98,7 @@
             <div style="display: flex; align-items: baseline; margin-top: 5px;">
                 <input type="text" id="guessInput"
                     onkeyup="dropDown()"
-                    placeholder="Gissa..."
+                    placeholder="Klicka i listan för att gissa"
                     title="Skriv ett namn"
                     style="flex: 1; height: 28px; font-size: 13px; padding: 4px 8px;">             
                 <button id="resetGuessButton" title="Rensa gissningslista" style="margin-left: 10px;">
@@ -209,16 +209,29 @@
         document.getElementById("resetButton").addEventListener("click", resetLists); //Reset
         document.getElementById("resetGuessButton").addEventListener("click", resetGuessList);
 
-        document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById("guessUL").addEventListener("click", function(e) {
-                    if (e.target && e.target.tagName === "A") {
-                        e.preventDefault();
-                        const selectedGuess = e.target.textContent;
-
-                        document.getElementById("guessInput").value = selectedGuess;
-                    }
-                });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Klick på art i listan
+            document.getElementById("guessUL").addEventListener("click", function (e) {
+                if (e.target && e.target.tagName === "A") {
+                    e.preventDefault();
+                    const selectedGuess = e.target.textContent;
+                    document.getElementById("guessInput").value = selectedGuess;
+                }
             });
+
+            // Enter = välj automatiskt om bara ett alternativ syns
+            document.getElementById("guessInput").addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    const visibleItems = Array.from(document.querySelectorAll("#guessUL li"))
+                        .filter(li => li.style.display !== "none");
+
+                    if (visibleItems.length === 1) {
+                        visibleItems[0].querySelector("a")?.click(); // Simulera klick på länken i listan
+                        event.preventDefault(); // Förhindra annan Enter-beteende
+                    }
+                }
+            });
+        });
         
         document.getElementById("speciesInput").addEventListener("keydown", function(event) {
             if (event.key === "Enter") {  // Kollar om användaren trycker på Enter i ändra träningslista
