@@ -731,5 +731,37 @@
     "Stripgås",
     "Sädgås",
     "Vitkindad gås"
-  ]
+  ],
+  "Snäppor":[
+    "Småspov",
+    "Storspov",
+    "Myrspov",
+    "Rödspov",
+    "Dvärgbeckasin", 
+    "Morkulla",
+    "Dubbelbeckasin",
+    "Enkelbeckasin",
+    "Brednäbbad simsnäppa",
+    "Smalnäbbad simsnäppa", 
+    "Tereksnäppa",
+    "Drillsnäppa",
+    "Skogssnäppa",
+    "Dammsnäppa",
+    "Grönbena",
+    "Rödbena",
+    "Svartsnäppa",
+    "Gluttsnäppa", 
+    "Roskarl",
+    "Kustsnäppa", 
+    "Brushane",
+    "Myrsnäppa",
+    "Spovsnäppa", 
+    "Mosnäppa",
+    "Sandlöpare",
+    "Kärrsnäppa", 
+    "Skärsnäppa",
+    "Småsnäppa",
+    "Tuvsnäppa"
+]
+
 }
