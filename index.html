@@ -47,7 +47,7 @@
                             <i class="fas fa-info-circle info-icon" onclick="showInfoAlert()"></i>
                             <span class="songTooltiptext">
                                 Välj sång om du vill slippa korta varningsläten etc.<br>
-                                Trumning kan vara ett bra val för hacspettar.<br>
+                                Trumning kan vara ett bra val för hackspettar.<br>
                                 Observera att vissa fåglar inte har sångläten.
                                 <span class="tooltipArrow"></span>
                             </span>
@@ -74,14 +74,14 @@
             <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
            
             <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px;">
-                <button onclick="playRandomBird()">Träna på nytt läte</button>
+                <button onclick="playRandomBird()" class="button" >Träna på nytt läte</button>
                 <span id="loadingStatus" style="font-size: 1em;"></span>
             </div>
 
 
             <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
             <div>
-                <button onclick="showClue()">Ledtråd</button>
+                <button onclick="showClue()" class="button" >Ledtråd</button>
             </div>
             <div>
                 <p id="clueText"></p> <!-- Visar ledtråden -->
@@ -100,7 +100,7 @@
                     onkeyup="dropDown()"
                     placeholder="Klicka i listan för att gissa"
                     title="Skriv ett namn"
-                    style="flex: 1; height: 28px; font-size: 13px; padding: 4px 8px;">             
+                    style="flex: 1; height: 24px; font-size: 13px; padding: 3px 6px;">             
                 <button id="resetGuessButton" title="Rensa gissningslista" style="margin-left: 10px;">
                   <i class="fas fa-sync-alt"></i>
                 </button>
@@ -116,8 +116,7 @@
                 <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
             </div>
             <div id="resultBar" style="margin-top: 10px; font-size: 0.9em;"></div>
-            <!-- <div><p>Antal gissningar: <span id="nbTries">0</span></p></div>
-            <div><p>Antal korrekta svar: <span id="nbCorrect">0</span></p></div> -->
+ 
             <div id="streakContainer" style="display: none;"> <!-- Dold från början -->
                 <p style="font-size: 0.9em;">Antal rätt i rad: <span id="nbInRow">0</span></p>
             </div>
@@ -131,18 +130,18 @@
             </div>
             <div>
                 <div style="margin-top: 20px;"></div>  <!-- Extra utrymme -->
-                <button onclick="downloadBirdFacts()">Spara till dator</button>
+                <button onclick="downloadBirdFacts()" class="button" >Spara till dator</button>
             </div>
             <div style="margin-top: 20px;"></div>  <!-- Extra utrymme -->
             <div style="margin-top: 40px; text-align: center;">
-                <button onclick="showInfoAlert()">ℹ</button>
+                <button onclick="showInfoAlert()" class="button" >ℹ</button>
             </div>
         </div>
     </div>
 
     <div id="customAlert" class="custom-alert" style="display: none;">
         <span id="customAlertText"></span>
-        <button onclick="hideCustomAlert()">OK</button>
+        <button  onclick="hideCustomAlert()">OK</button>
     </div>
 
     <footer style="text-align: center; margin-top: 40px; font-size: 0.85em; opacity: 0.7;">
@@ -459,7 +458,7 @@
             document.getElementById('resultSpecies').textContent = "";
             
             if (!guessList || guessList.length === 0) { 
-                showCustomAlert("Välj arter att träna på")
+                showCustomAlert("Välj arter att träna på &nbsp;")
                 return; 
             }
             document.getElementById("loadingStatus").innerHTML = `<span class="spinner"></span>`;
@@ -839,17 +838,81 @@
             URL.revokeObjectURL(url); // Rensa temporär URL
         }
 
+        // function showInfoAlert() {
+        //     showCustomAlert(
+        //         "🕊️ Träna fågelsång\n\n" +
+        //         "Välj ut arter\n" +
+        //         "Börja i kolumnen till vänster och skriv t.ex. 'hackspett' i rutan \"Sök arter att träna på\"\n" +
+        //         "Ett antal förslag visas. Du kan klicka ur dom arter du inte vill träna på\n" +
+        //         "Klicka sedan på \"Spara\"-knappen\n\n" +
+
+        //         "Träna\n" +
+        //         "Börja träna genom att klicka på \"Träna på nytt läte\"\n" +
+        //         "Gissa på arterna \n" +
+        //         "Ledtrådar är ett bra sätt att minnas\n" +
+        //         "För att börja om, klicka på återställ-knappen: ↺\n\n" +
+
+        //         "När du hållit på ett tag kan du välja:\n" +
+        //         "\"Inkludera förväxlingsarter\": Söker du t.ex. blåmes och brukar blanda\n" +
+        //         "ihop blåmes och talgoxe, så dyker även talgoxe upp som förslag\n" +
+        //         "\"Undvik arter du redan kan\": Då dyker bara de arter som du ofta gissar fel på upp som förslag\n\n" +
+
+        //         "Vill du spara dina framsteg?\n" +
+        //         "- Klicka på \"Spara\"-knappen i högra kolumnen, längst ned\n" +
+        //         "- Nästa gång du börjar träna kan du hämta tillbaka uppgifterna med \"Hämta\"-knappen\n\n" +
+
+        //         "🎧 Ljud: xeno-canto    🖼️ Bilder: Pixabay" +
+        //         ""
+        //     );
+        // }
+
         function showInfoAlert() {
-            showCustomAlert(
-                "🕊️ Träna fågelsång\n\n" +
-                "Lyssna på fågelläten och gissa vilken art det är.\n" +
-                "Du kan välja ut arter att träna på \n" + 
-                "Du kan visa ledtrådar och skriva in dina egna. \n" +  
-                "Du kan spara din statistik och hämta den igen nästa gång.\n\n" +
-                "🎧 Ljud: xeno-canto\n🖼️ Bilder: Pixabay\n" +
-                ""
-            );
+            showCustomAlert(`
+                <div style="text-align: left;">
+                    <h3>🕊️ Träna fågelsång</h3>
+
+                    <strong>🔹 Välj ut arter</strong>
+                    <ul>
+                        <li>Börja i kolumnen till vänster och skriv t.ex. "hackspett"</li>
+                        <li>Ett antal förslag visas – klicka ur de du inte vill träna på</li>
+                        <li>Klicka på "Spara"-knappen</li>
+                    </ul>
+
+                    <strong>🔹 Träna</strong>
+                    <ul>
+                        <li>Klicka på "Träna på nytt läte"</li>
+                        <li>Använd ledtrådar för att minnas bättre</li>
+                        <li>Återställ med knappen: ↺</li>
+                    </ul>
+
+                    <strong>🔹 När du tränat ett tag</strong>
+                    <ul>
+                        <li><strong><em>Inkludera förväxlingsarter:</em></strong> söker du t.ex. blåmes och brukar blanda ihop <br> blåmes och talgoxe, så dyker även talgoxe upp som förslag</li>
+                        <li><strong><em>Undvik arter du redan kan:</em></strong> bara arter du ofta gissar fel på visas</li>
+                    </ul>
+
+                    <strong>🔹 Vill du spara dina framsteg?</strong>
+                    <ul>
+                        <li>Klicka på "Spara"-knappen längst ned i högra kolumnen</li>
+                        <li>Använd "Hämta"-knappen nästa gång</li>
+                    </ul>
+
+                    <p>
+                        Vi tar gärna emot dina synpunkter och idéer! &nbsp;
+                        <a href="javascript:void(0);" onclick="sendMail()">Skicka e-post</a>
+                    </a>
+                    </p>
+
+                    <p>🎧 Ljud: xeno-canto     &nbsp;&nbsp;&nbsp;&nbsp;   🖼️ Bilder: Pixabay</p>
+                </div>
+            `);
         }
+
+        function sendMail() {
+            const address = ['tranafagelsang', 'gmail', 'com'].join('@').replace('@', '.');
+            window.location.href = `mailto:${address}?subject=Feedback%20från%20fågelsångssidan`;
+        }
+
 
         function updateResultBar() {
             const bar = document.getElementById("resultBar");
@@ -987,7 +1050,7 @@
         function showCustomAlert(message) {
             const alertBox = document.getElementById("customAlert");
             const alertText = document.getElementById("customAlertText");
-            alertText.innerText = message;
+            alertText.innerHTML = message;
             alertBox.style.display = "block";
         }
 

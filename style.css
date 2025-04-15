@@ -6,12 +6,13 @@ body {
   display: grid;
   justify-content: center;
   background-color: #f4f4f4;
+  color: black;/* #152415; */
 }
 
 .guess-result {
   min-height: 30px;  /* Se till att rutan alltid har höjd */
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
   /* font-weight: bold; */
   margin-top: 10px;
   padding: 5px;
@@ -102,6 +103,7 @@ body {
   .container {
       display: flex;
       flex-direction: column;
+      padding: 10px;
       gap: 10px;
   }
 
@@ -137,17 +139,22 @@ body {
 
 #guessUL li {
   list-style: none; /* inga punkter visas */
+  margin: 0;  
+  line-height: 1;
+  margin-top: -1px;
 }
 
 #guessUL li a {
   border: 1px solid #ddd;
   margin-top: -1px; 
-  background-color: #f6f6f6;
+  background-color: #f6f6f6; /* #f6f6f6 */
   padding: 4px;
   text-decoration: none;
   font-size: 11px;
   color: black;
-  display: block
+  display: block;
+  /* width: 200px;               Fast bredd */
+  /* margin: 0px auto;         Centrerar horisontellt  */
 }
 
 #guessUL li a:hover:not(.header) {
@@ -162,7 +169,7 @@ body {
 .songTooltip .songTooltiptext {
   visibility: hidden;
   background-color: #eff0f1;
-  color: #122012;
+  color: black; 
   text-align: left;
   padding: 8px 10px;
   border-radius: 6px;
@@ -249,7 +256,7 @@ input:focus {
 }
 
 .tag-button:hover {
-  background-color: #bbd1e4;             /* Ljusare blå än tidigare */
+  background-color: #e0e0e0;             /* Ljusare blå än tidigare */
   border-color: #4a6c8c;
 }
 
@@ -259,17 +266,12 @@ input:focus {
   border-color: #2d4a2d;
 }
 
-.tag-button .checkmark {
-  visibility: hidden;
-  width: 1em;
-  text-align: center;
-  color: black;
-}
-
 .checkmark {
-  margin-right: 4px;
   visibility: hidden;
   color: black;
+  width: 1em;
+  margin-right: 4px;
+  text-align: center;
 }
 
 .tag-button.selected .checkmark {
@@ -285,7 +287,7 @@ input:focus {
 
 .custom-alert {
   position: fixed;
-  top: 30%;
+  top: 22%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #ededee;
@@ -294,10 +296,12 @@ input:focus {
   padding: 16px 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   font-size: 0.95em;
-  color: #223a22;
+  color: black;
   z-index: 9999;
   text-align: center;
   min-width: 280px;
+  max-height: 80vh;         /* Maxhöjd baserat på viewport */
+  overflow-y: auto;         /* Scroll om det behövs */
 }
 
 .custom-alert button {
@@ -313,3 +317,34 @@ input:focus {
 .custom-alert button:hover {
   background-color: #a2b9d3;
 }
+
+.custom-alert ul {
+  margin-top: 4px; /* mindre än det vanliga */
+}
+
+.custom-alert h3 {
+  text-align: center;
+}
+
+.custom-alert p {
+  text-align: center;
+}
+
+.button {
+  background-color: #f0f0f0;
+  color: black;
+  border: 1px solid #2d4a2d;
+  border-radius: 3px;
+  padding: 3px 6px;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+
+
