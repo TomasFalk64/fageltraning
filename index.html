@@ -16,7 +16,7 @@
     
     <div class="container">
         <div class="filters">
-            
+            <p class="section-title">Välj arter</p>
             <div><input type="checkbox" id="includeConfusion" class="custom-checkbox" /> Inkludera förväxlingsarter</div>
             <div><input type="checkbox" id="excludeSure" class="custom-checkbox" /> Undvik arter du redan kan</div>
             <div> 
@@ -70,6 +70,7 @@
         </div>
 
         <div class="mitt">
+            <p class="section-title">Träning</p>
             <div><audio id="audioPlayer" controls></audio></div> 
             <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
            
@@ -112,7 +113,7 @@
 
         <div class="statistics">
             <div>
-                <p><strong style="font-size: 0.9em;">Statistik</strong></p>
+                <p class="section-title">Statistik</p>
                 <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
             </div>
             <div id="resultBar" style="margin-top: 10px; font-size: 0.9em;"></div>
@@ -123,6 +124,10 @@
             <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
             <canvas id="progressChart" width="300" height="150" style="margin-top: 20px;"></canvas>
             <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
+
+            <div id="groupStats" style="margin-top: 30px;"></div>
+            <div style="margin-top: 40px;"></div>  <!-- Extra utrymme -->
+
             <div>
                 <p><strong style="font-size: 0.9em;">Hämta eller spara din data</strong></p>
                 <input type="file" id="uploadFileInput" accept=".json" />
@@ -164,6 +169,7 @@
         let trainList = [];
         let guessList = [];
         let birdImageList = [];
+        let birdMetadata = {};
 
         const soundCache = {};
         const soundCacheOrder = [];
@@ -189,17 +195,26 @@
             artgrupper = await response.json(); 
         }
 
+        async function loadbirdMetadata() {
+            const response = await fetch('metadata.json'); 
+            birdMetadata = await response.json(); 
+        }
+
+
+
         async function init() {
             await Promise.all([
                 loadBirdFacts(),
                 loadArtgrupper(),
-                loadBirdImages()
+                loadBirdImages(),
+                loadbirdMetadata(),
+                visaArtgruppStatistik()
             ]);
             console.log("BirdFacts:", birdFacts);
             console.log("Artgrupper:", artgrupper);
             //console.log("birdImageList:", birdImageList);
 
-            updateResultBar();
+            resetLists();
         }
 
         init();
@@ -270,7 +285,15 @@
             document.getElementById("resultSpecies").textContent = "";
             document.getElementById("loadingStatus").innerHTML = "";
             document.getElementById("audioPlayer").src = ""; // Stoppar ljudet
-                                
+
+            nbTries = 0;
+            nbCorrect = 0;
+            accuracyData = [];
+            attemptLabels = [];
+            updateChart();
+            updateResultBar()
+
+            visaArtgruppStatistik();                    
             populateGuessList(); 
         }
                 
@@ -655,6 +678,7 @@
 
             updateResultBar()
             updateChart();
+            visaArtgruppStatistik();
             resultDiv.textContent = responseText;
           
             await showSpeciesImage(birdFacts[currentSpecies].name);
@@ -677,19 +701,6 @@
         async function showSpeciesImage(svName) {
             const imageDiv = document.getElementById('speciesImage');
 
-            // 1. Leta efter matchande lokal bild i birdImageList
-            // function escapeRegex(str) {
-            //     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // skydda specialtecken
-            // }
-
-            // const safeSvName = escapeRegex(svName.trim());
-            // const regex = new RegExp(`(^|[^a-zåäöA-ZÅÄÖ])${safeSvName}([^a-zåäöA-ZÅÄÖ]|$)`, 'i');
-
-            // const matchingLocal = birdImageList.filter(filename => {
-            //     const name = filename.replace(/\.[^/.]+$/, ""); // ta bort filändelse
-            //     return regex.test(name);
-            // });
-
             function normalizeName(name) {
                 return name
                     .toLowerCase()
@@ -706,12 +717,34 @@
                 return normalizedFile.includes(normalizedSvName);
             });
 
-            console.log("Bild " , svName, normalizedSvName, matchingLocal );
+            console.log("Bild ", svName, normalizedSvName, matchingLocal, Object.keys(birdMetadata).length);
+            
 
             if (matchingLocal.length > 0) {
                 const randomLocal = matchingLocal[Math.floor(Math.random() * matchingLocal.length)];
                 const localUrl = `birdPicts/${randomLocal}`;
-                imageDiv.innerHTML = `<img src="${localUrl}" alt="${svName}" style="max-width: 180px; border-radius: 10px;">`;
+
+                console.log(birdMetadata[randomLocal]);
+            // Hämta metadata för bilden
+            const meta = birdMetadata[randomLocal];
+                let titleText = "";
+                if (meta) {
+                    const { provider, photographer } = meta;
+                    if (provider && photographer) {
+                        titleText = `📷 ${provider}, ${photographer}`;
+                    } else if (provider) {
+                        titleText = `📷 ${provider}`;
+                    } else if (photographer) {
+                        titleText = `📷 ${photographer}`;
+                    }
+                }
+
+                imageDiv.innerHTML = `
+                    <div class="image-container">
+                        <img src="${localUrl}" alt="${svName}" style="max-width: 180px; border-radius: 10px;">
+                        <div class="image-meta">${titleText}</div>
+                    </div>
+                `;
                 return;
             }
 
@@ -814,6 +847,7 @@
                 try {
                     birdFacts = JSON.parse(event.target.result); // Spara innehållet i variabeln
                     showCustomAlert("Fil med fågeldata har laddats in!");
+                    visaArtgruppStatistik();
                 } catch (error) {
                     showCustomAlert("Fel vid inläsning av JSON-filen.");
                     console.error("JSON-parse-fel:", error);
@@ -918,7 +952,7 @@
             const bar = document.getElementById("resultBar");
 
             if (nbTries === 0) {
-                bar.textContent = "Inga försök ännu."; // 🎯
+                bar.textContent = "";
                 return;
             }
 
@@ -931,16 +965,6 @@
         }
 
         function updateChart() {
-            if (nbTries === 0) return;
-
-            const percent = Math.round((nbCorrect / nbTries) * 100);
-            accuracyData.push(percent);
-            attemptLabels.push(nbTries.toString());
-            if (accuracyData.length > 20) {
-                accuracyData.shift();
-                attemptLabels.shift();
-            }
-
             if (!progressChart) {
                 const ctx = document.getElementById("progressChart").getContext("2d");
                 progressChart = new Chart(ctx, {
@@ -975,11 +999,23 @@
                         }
                     }
                 });
-            } else {
-                progressChart.data.labels = attemptLabels;
-                progressChart.data.datasets[0].data = accuracyData;
-                progressChart.update();
             }
+
+            // Lägg bara till datapunkt om det finns försök
+            if (nbTries > 0) {
+                const percent = Math.round((nbCorrect / nbTries) * 100);
+                accuracyData.push(percent);
+                attemptLabels.push(nbTries.toString());
+
+                if (accuracyData.length > 20) {
+                    accuracyData.shift();
+                    attemptLabels.shift();
+                }
+            }
+
+            progressChart.data.labels = attemptLabels;
+            progressChart.data.datasets[0].data = accuracyData;
+            progressChart.update();
         }
 
         function resetGuessList() {
@@ -1057,6 +1093,62 @@
         function hideCustomAlert() {
             document.getElementById("customAlert").style.display = "none";
         }
+
+        function visaArtgruppStatistik() {
+            const grupperAttVisa = ["mesar", "sparvar", "trastar", "gäss", "änder", "finkar", "kråkor", "höns", "vadare", "måsar", "rovfåglar", "ugglor", "hackspettar", "sångare", "flugsnappare"]; // justera efter behov
+            const statistik = [];
+
+            grupperAttVisa.forEach(grupp => {
+                const arter = artgrupper[grupp];
+                if (!arter) return;
+
+                let totalTries = 0;
+                let totalCorrect = 0;
+
+                arter.forEach(svName => {
+                    for (const latinName in birdFacts) {
+                        const fakta = birdFacts[latinName];
+                        if (fakta.name === svName) {
+                            totalTries += fakta.nbTries || 0;
+                            totalCorrect += fakta.nbCorrect || 0;
+                        }
+                    }
+                });
+
+                if (totalTries > 0) {
+                    const procent = Math.round((totalCorrect / totalTries) * 100);
+                    statistik.push({
+                        grupp,
+                        procent,
+                        totalTries,
+                        totalCorrect
+                    });
+                }
+            });
+
+            // Sortera i fallande ordning efter % rätt
+            statistik.sort((a, b) => b.procent - a.procent);
+
+            // Bygg HTML-tabellen
+            let html = "<p style='font-weight: bold; font-size: 0.9em; margin-bottom: 8px;'>Resultat per artgrupp</p>";
+            html += "<table style='font-size: 0.9em; border-collapse: collapse;'>";
+
+            statistik.forEach(row => {
+                html += `<tr>
+                    <td style="padding-right: 10px;">${row.grupp.charAt(0).toUpperCase() + row.grupp.slice(1)}</td>
+                    <td style="padding-right: 10px;">${row.procent}%</td>
+                    <td> efter ${row.totalTries} försök</td>
+                </tr>`;
+            });
+
+            html += "</table>";
+
+            html += "</table>";
+            document.getElementById("groupStats").innerHTML = html;
+        }
+
+
+
 
     </script>
 </body>

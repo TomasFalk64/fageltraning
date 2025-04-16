@@ -353,6 +353,46 @@
     "Videsparv",
     "Vinterhämpling"
   ],
+  "mesar": [
+    "Blåmes",
+    "Lappmes",
+    "Pungmes",
+    "Skäggmes",
+    "Stjärtmes",
+    "Svartmes",
+    "Talgoxe",
+    "Talltita",
+    "Entita",
+    "Tofsmes"
+  ],
+  "finkar": [
+    "Bergfink",
+    "Bofink",
+    "Bändelkorsnäbb",
+    "Domherre",
+    "Gråsiska",
+    "Grönfink",
+    "Grönsiska",
+    "Gulhämpling",
+    "Hämpling",
+    "Mindre korsnäbb",
+    "Rosenfink",
+    "Steglits",
+    "Stenknäck",
+    "Större korsnäbb",
+    "Tallbit",
+    "Vinterhämpling"
+  ],
+  "sparvar": [
+  "Dvärgsparv",
+  "Gulsparv",
+  "Ortolansparv",
+  "Kornsparv",
+  "Lappsparv",
+  "Snösparv",
+  "Sävsparv",
+  "Videsparv"
+  ],
   "trastar": [
     "Björktrast",
     "Dubbeltrast",

@@ -346,5 +346,39 @@ input:focus {
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
+.image-container {
+  position: relative;
+  display: inline-block;
+}
 
+.image-meta {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  /*display: none;  Dölj från början */
+  max-width: 180px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.3s; /* <- 0.2s delay innan fade-in */
+}
+
+.image-container:hover .image-meta {
+  /*display: block;  Visa bara vid hover */
+  opacity: 1;
+  transition-delay: 0.3s; /* visas först efter 0.2s hover */
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 0.95em;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #0c1a64;
+}
 
