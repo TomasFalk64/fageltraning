@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Träna fågelsång</title> <!-- 🐦 -->
+    <title>Träna fågelsång</title> 
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="favicon_TF.ico" type="image/x-icon">
@@ -17,48 +17,56 @@
     <div class="container">
         <div class="filters">
             <p class="section-title">Välj arter</p>
-            <div><input type="checkbox" id="includeConfusion" class="custom-checkbox" /> Inkludera förväxlingsarter</div>
-            <div><input type="checkbox" id="excludeSure" class="custom-checkbox" /> Undvik arter du redan kan</div>
-            <div> 
-                <!-- <input type="checkbox" id="songonly" class="custom-checkbox" checked /> 
-                Spela bara sångläten -->
-                <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
-                <div>
-                    <div id="soundTags" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
-                      <button class="tag-button selected" data-type="song">
-                        <span class="checkmark">✓</span> Sång <span class="filler">&nbsp;</span>
-                      </button>
-                      <button class="tag-button" data-type="alarm call">
-                        <span class="checkmark">✓</span> Varningsläte <span class="filler">&nbsp;</span>
-                      </button>
-                      <button class="tag-button" data-type="call">
-                        <span class="checkmark">✓</span> Kontaktläte <span class="filler">&nbsp;</span>
-                      </button>
-                      <button class="tag-button" data-type="flight call">
-                        <span class="checkmark">✓</span> Flyktläte <span class="filler">&nbsp;</span>
-                      </button>
-                      <button class="tag-button" data-type="drumming">
-                        <span class="checkmark">✓</span> Trumning <span class="filler">&nbsp;</span>
-                      </button>
-                  
-                      
-                      <div style="width: 30px;"></div>  <!--  mellanrum efter sista knappen -->
-                        <span class="songTooltip">
-                            <i class="fas fa-info-circle info-icon" onclick="showInfoAlert()"></i>
-                            <span class="songTooltiptext">
-                                Välj sång om du vill slippa korta varningsläten etc.<br>
-                                Trumning kan vara ett bra val för hackspettar.<br>
-                                Observera att vissa fåglar inte har sångläten.
-                                <span class="tooltipArrow"></span>
+
+            <details>
+                <summary class="section-title-left">Inställningar</summary>
+
+                <div><input type="checkbox" id="includeConfusion" class="custom-checkbox" /> Inkludera förväxlingsarter</div>
+                <div><input type="checkbox" id="excludeSure" class="custom-checkbox" /> Undvik arter du redan kan</div>
+                <div> 
+                    <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
+                    <div>
+                        <div id="soundTags" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+                        <button class="tag-button selected" data-type="song">
+                            <span class="checkmark">✓</span> Sång <span class="filler">&nbsp;</span>
+                        </button>
+                        <button class="tag-button" data-type="alarm call">
+                            <span class="checkmark">✓</span> Varningsläte <span class="filler">&nbsp;</span>
+                        </button>
+                        <button class="tag-button" data-type="call">
+                            <span class="checkmark">✓</span> Kontaktläte <span class="filler">&nbsp;</span>
+                        </button>
+                        <button class="tag-button" data-type="flight call">
+                            <span class="checkmark">✓</span> Flyktläte <span class="filler">&nbsp;</span>
+                        </button>
+                        <button class="tag-button" data-type="drumming">
+                            <span class="checkmark">✓</span> Trumning <span class="filler">&nbsp;</span>
+                        </button>
+                    
+                        
+                        <div style="width: 30px;"></div>  <!--  mellanrum efter sista knappen -->
+                            <span class="songTooltip">
+                                <i class="fas fa-info-circle info-icon" onclick="showInfoAlert()"></i>
+                                <span class="songTooltiptext">
+                                    Välj sång om du vill slippa korta varningsläten etc.<br>
+                                    Trumning kan vara ett bra val för hackspettar.<br>
+                                    Observera att vissa fåglar inte har sångläten.
+                                    <span class="tooltipArrow"></span>
+                                </span>
                             </span>
-                        </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-              
-            <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
-            <div style="display: flex; align-items: center;">
-                <input type="text" id="speciesInput" placeholder="Sök arter att träna på" style="flex: 1;">
+            </details>
+
+            <div style="display: flex; align-items: center; margin-top: 30px;">
+                
+                <input type="text"
+                    id="speciesInput"
+                    placeholder="Sök arter att träna på"
+                    title="Skriv t.ex. gråsparv, sparv, sparvar, passer eller skog"
+                    style="flex: 1;">
+
                 <button id="resetButton" title="Återställ" style="margin-left: 10px;">
                     <i class="fas fa-sync-alt"></i>  <!-- Ikon för återställning -->
                 </button>
@@ -72,75 +80,65 @@
         <div class="mitt">
             <p class="section-title">Träning</p>
             <div><audio id="audioPlayer" controls></audio></div> 
-            <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
            
-            <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px;">
-                <button onclick="playRandomBird()" class="button" >Träna på nytt läte</button>
+            <div id="trainButtons" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+                <button id="playButton" onclick="playRandomBird()" class="button" >Träna på nytt läte</button>
                 <span id="loadingStatus" style="font-size: 1em;"></span>
             </div>
 
-
-            <div style="margin-top: 30px;"></div>  <!-- Extra utrymme -->
-            <div>
-                <button onclick="showClue()" class="button" >Ledtråd</button>
+            <div id="clueButtons" style="margin-top: 30px;">
+                <button id="clueButton" onclick="showClue()" class="button" >Ledtråd</button>
             </div>
             <div>
                 <p id="clueText"></p> <!-- Visar ledtråden -->
                 <input type="text" id="customClueInput" placeholder="Skriv en egen ledtråd..." style="display:none;">
             </div>
-            <div style="margin-top: 20px;"></div>  
-            <div id="guessResult" class="guess-result"></div> 
-            <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
-            <div id="speciesImage"></div>
-            <!--<div style="margin-top: 10px;"></div>   Extra utrymme -->
+            <div id="guessResult" class="guess-result" style="margin-top: 20px;"></div>
+      
+            <div id="speciesImage" style="margin-top: 10px;"></div>
+            
             <div id="resultSpecies" class="result-species"></div>
 
-            <!-- <div style="display: flex; align-items: center; margin-top: 5px;">  -->
-            <div style="display: flex; align-items: baseline; margin-top: 5px;">
+            <div id="guessing" style="display: flex; align-items: center; gap: 8px; margin-top: 5px;">
                 <input type="text" id="guessInput"
                     onkeyup="dropDown()"
                     placeholder="Klicka i listan för att gissa"
                     title="Skriv ett namn"
-                    style="flex: 1; height: 24px; font-size: 13px; padding: 3px 6px;">             
+                    style="flex: 1; height: 22px; font-size: 13px; padding: 3px 6px;">   
+                              
                 <button id="resetGuessButton" title="Rensa gissningslista" style="margin-left: 10px;">
                   <i class="fas fa-sync-alt"></i>
                 </button>
-
             </div>
+
             <div style="margin-top: 5px;"></div>
             <ul id="guessUL"></ul> <!-- Dynamisk lista -->
         </div>
 
         <div class="statistics">
-            <div>
-                <p class="section-title">Statistik</p>
-                <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
-            </div>
+            <p class="section-title" style="margin-bottom: 10px;">Statistik</p>
+
             <div id="resultBar" style="margin-top: 10px; font-size: 0.9em;"></div>
  
-            <div id="streakContainer" style="display: none;"> <!-- Dold från början -->
-                <p style="font-size: 0.9em;">Antal rätt i rad: <span id="nbInRow">0</span></p>
-            </div>
-            <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
-            <canvas id="progressChart" width="300" height="150" style="margin-top: 20px;"></canvas>
-            <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
-
+             <canvas id="progressChart" width="300" height="150" style="margin-top: 20px;"></canvas>
+          
             <div id="groupStats" style="margin-top: 30px;"></div>
-            <div style="margin-top: 40px;"></div>  <!-- Extra utrymme -->
+            
 
-            <div>
-                <p><strong style="font-size: 0.9em;">Hämta eller spara din data</strong></p>
-                <input type="file" id="uploadFileInput" accept=".json" />
-                <div style="margin-top: 10px;"></div>  <!-- Extra utrymme -->
+            <details style="margin-top: 50px;">
+                <summary class="section-title-left">Hämta eller spara din data</summary>
+                <div style="margin-top: 10px;">
+                  <input type="file" id="uploadFileInput" accept=".json" />
+                </div>
+                <div style="margin-top: 20px;">
+                  <button onclick="downloadBirdFacts()" class="button">Spara till dator</button>
+                </div>
+            </details>  
+            
+            <div style="margin-top: 10px; text-align: center;">
+                <button onclick="showInfoAlert()" class="info-button"><i class="fas fa-question"></i></button>
             </div>
-            <div>
-                <div style="margin-top: 20px;"></div>  <!-- Extra utrymme -->
-                <button onclick="downloadBirdFacts()" class="button" >Spara till dator</button>
-            </div>
-            <div style="margin-top: 20px;"></div>  <!-- Extra utrymme -->
-            <div style="margin-top: 40px; text-align: center;">
-                <button onclick="showInfoAlert()" class="button" >ℹ</button>
-            </div>
+            
         </div>
     </div>
 
@@ -163,6 +161,7 @@
         let nbTries = 0;
         let nbCorrect = 0;
         let streakCount= 0;
+        let avbrutenLjudsökning = false;
         
         let birdFacts = {};
         let artgrupper = {};
@@ -215,6 +214,8 @@
             //console.log("birdImageList:", birdImageList);
 
             resetLists();
+            uppdateraTräningsknappar();
+            document.getElementById("speciesInput").focus();
         }
 
         init();
@@ -284,17 +285,21 @@
             document.getElementById("speciesImage").innerHTML = "";
             document.getElementById("resultSpecies").textContent = "";
             document.getElementById("loadingStatus").innerHTML = "";
-            document.getElementById("audioPlayer").src = ""; // Stoppar ljudet
+            document.getElementById("audioPlayer").src = ""; 
 
             nbTries = 0;
             nbCorrect = 0;
+            avbrutenLjudsökning = true;
             accuracyData = [];
             attemptLabels = [];
             updateChart();
             updateResultBar()
+            uppdateraTräningsknappar();
 
             visaArtgruppStatistik();                    
             populateGuessList(); 
+
+            document.getElementById("speciesInput").focus();
         }
                 
         async function findTrainList() {
@@ -355,8 +360,8 @@
                     }
                 }
             }
-                             // Om includeConfusion är ikryssad, lägg till förväxlingsarter
-            if (includeConfusionCheckbox.checked) {
+                            
+            if (includeConfusionCheckbox.checked) {  // Lägg till förväxlingsarter
                     const confusionSpecies = new Set();
 
                     trainList.forEach(species => {
@@ -445,7 +450,6 @@
             const timeSinceLast = now - window.lastSearchTime;
             if (timeSinceLast < 1000) {
                 const delay = 1000 - timeSinceLast;
-                //console.log(`⏱️ Väntar ${delay} ms p.g.a. tidsgräns`);
                 await new Promise(resolve => setTimeout(resolve, delay));
             }
 
@@ -468,14 +472,15 @@
 
             document.getElementById("speciesInput").value = "";
             populateGuessList();
+            uppdateraTräningsknappar();
             updateResultBar()
         }
 
         async function playRandomBird() {
             document.getElementById("guessResult").textContent = "";
             document.getElementById("guessResult").className = "guess-result";
-            document.getElementById('clueText').textContent = ""; // suddar ev tidigare clue
-            document.getElementById('customClueInput').style.display = "none"; // Dölj inmatningsfältet
+            document.getElementById('clueText').textContent = ""; 
+            document.getElementById('customClueInput').style.display = "none"; 
             document.getElementById('guessInput').value = ""
             document.getElementById('speciesImage').innerHTML = "";
             document.getElementById('resultSpecies').textContent = "";
@@ -488,17 +493,22 @@
             
             
             currentSpecies = guessList[Math.floor(Math.random() * guessList.length)]; // Ex: "Parus major"
-            //const songOnly = document.getElementById('songonly').checked;  //NNN
+           
 
             try {
-                // const randomRecording = await fetchRecording(currentSpecies, songOnly); // NNN
-                // const randomRecording = await fetchRecording(currentSpecies);
+                avbrutenLjudsökning = false;
+                
                 const selectedTypes = getSelectedSoundTypes(); // t.ex. ["song", "call"]
                 const randomRecording = await fetchRecording(currentSpecies, selectedTypes);
                 
+                if (avbrutenLjudsökning) {
+                    //console.log("🔇 Ljudet avbröts p.g.a. återställning");
+                    return;
+                }
+
                 if (!randomRecording) {
                     document.getElementById("loadingStatus").innerHTML = "";
-                    showCustomAlert("Inga ljudinspelningar hittades. Prova att avmarkera alla ljudtyper");
+                    showCustomAlert("Inga ljudinspelningar hittades. Prova att ändra ljudtyp i Inställningar");
                     return;
                 }
 
@@ -508,9 +518,7 @@
                     const xcId = `XC${randomRecording.id}`;
                     const recordist = randomRecording.rec || "okänd inspelare";
 
-                    // document.getElementById("loadingStatus").innerHTML = `
-                    //     <span title="${xcId} – ${recordist}" style="cursor: default;">🔊</span>`;
-                    document.getElementById("loadingStatus").innerHTML = `
+                      document.getElementById("loadingStatus").innerHTML = `
                         <span title="Inspelning: ${xcId} – ${recordist}\nKlicka för att öppna i Xeno-Canto">
                             <a href="https://xeno-canto.org/${randomRecording.id}" target="_blank" style="text-decoration: none; color: inherit;">🔊</a>
                         </span>`;
@@ -644,25 +652,39 @@
             birdFacts[currentSpecies].nbTries += 1;
 
             if (isCorrect) {
+                nbCorrect += 1;
+                birdFacts[currentSpecies].nbCorrect += 1;
+                streakCount += 1;
+
+                if (streakCount === 3) {
+                    responseText = "🔥 Tre rätt i rad! Du är på gång!";
+                } else if (streakCount === 5) {
+                    responseText = "🌟 Fem i rad! Fantastiskt!";
+                } else if (streakCount === 10) {
+                    responseText = "🚀 Tio rätt i rad!? Du är mästare!";
+                } else {
                 const correctResponses = [
                     `🍀 Rätt!`,
-                    `🍀 Bra jobbat!`,
+                    "🎯 Spot on!",
+                    "🎯 Fullträff!",
+                    `💚 Bra jobbat! 💚`,
+                    "💚 Yes! Du tog den! 💚",
+                    "💚 Bra öron – det var rätt!",
                     `🍀 Exakt!`,
                     `🍀 Helt rätt!`,
                     `🍀 Snyggt!`,
                     `🍀 Du har koll på`
-                ];
+                ]; 
                 responseText = correctResponses[Math.floor(Math.random() * correctResponses.length)];
-                nbCorrect += 1;
-                birdFacts[currentSpecies].nbCorrect += 1;
-                streakCount += 1;
+                }  
             } else {
                 const incorrectResponses = [
                     `❌ Fel!`,
+                    "😕 Miss. Försök igen",
                     `❌ Inte riktigt!`,
-                    `❌ Nästan!`,
-                    `❌ Ojdå!`,
-                    `❌ Bättre lycka nästa gång!`
+                    `❌ Fel – men nära kanske?`,
+                    `🙈 Bättre lycka nästa gång!`,
+                    `😬 Inte riktigt. Prova nästa!`
                 ];
                 responseText = incorrectResponses[Math.floor(Math.random() * incorrectResponses.length)];
                 streakCount = 0;
@@ -685,13 +707,13 @@
 
             // document.getElementById('nbTries').textContent = nbTries;
             // document.getElementById('nbCorrect').textContent = nbCorrect;
-            const streakContainer = document.getElementById("streakContainer");
-            if (streakCount > 4) {
-                streakContainer.style.display = "block"; // Visa om > 5
-                document.getElementById('nbInRow').textContent = streakCount;
-            } else {
-                streakContainer.style.display = "none"; // Dölj annars
-            }
+            //const streakContainer = document.getElementById("streakContainer");
+            // if (streakCount > 4) {
+            //     streakContainer.style.display = "block"; // Visa om > 5
+            //     document.getElementById('nbInRow').textContent = streakCount;
+            // } else {
+            //     streakContainer.style.display = "none"; // Dölj annars
+            // }
             resultSpeciesDiv.innerHTML = `${birdFacts[currentSpecies].name} <em>${currentSpecies}</em> ${getSexSymbol(currentSpeciesSex)}`;  // Artnamn under bild Latinskt namn i kursiv stil
 
             document.getElementById('guessInput').value = "" //nollställ gissa-rutan
@@ -809,7 +831,7 @@
             customClueInput.value = ""
             
             if (!currentSpecies) {
-                clueText.textContent = "Lägg till arter först!";
+                // clueText.textContent = "Lägg till arter först!";
                 return;
             }
 
@@ -907,8 +929,8 @@
 
                     <strong>🔹 Välj ut arter</strong>
                     <ul>
-                        <li>Börja i kolumnen till vänster och skriv t.ex. "hackspett"</li>
-                        <li>Ett antal förslag visas – klicka ur de du inte vill träna på</li>
+                        <li>Börja i kolumnen till vänster och skriv t.ex. "hackspett", "sylvia" eller "strand"</li>
+                        <li>Ett antal förslag visas – Klicka ur de du inte vill träna på</li>
                         <li>Klicka på "Spara"-knappen</li>
                     </ul>
 
@@ -932,12 +954,12 @@
                     </ul>
 
                     <p>
-                        Vi tar gärna emot dina synpunkter och idéer! &nbsp;
+                        Synpunkter och idéer mottages tacksamt &nbsp;
                         <a href="javascript:void(0);" onclick="sendMail()">Skicka e-post</a>
                     </a>
                     </p>
 
-                    <p>🎧 Ljud: xeno-canto     &nbsp;&nbsp;&nbsp;&nbsp;   🖼️ Bilder: Pixabay</p>
+                    <p>🎧 Ljud: xeno-canto     &nbsp;&nbsp;&nbsp;&nbsp;   🖼️ Bilder: Pixabay och iNaturalist</p>
                 </div>
             `);
         }
@@ -1039,6 +1061,8 @@
             // Töm gissningslistan visuellt
             document.getElementById("guessUL").innerHTML = "";
 
+            uppdateraTräningsknappar();
+
         }
 
         function getSexSymbol(sex) {
@@ -1095,7 +1119,7 @@
         }
 
         function visaArtgruppStatistik() {
-            const grupperAttVisa = ["mesar", "sparvar", "trastar", "gäss", "änder", "finkar", "kråkor", "höns", "vadare", "måsar", "rovfåglar", "ugglor", "hackspettar", "sångare", "flugsnappare"]; // justera efter behov
+            const grupperAttVisa = ["mesar", "sparvar", "trastar", "gäss", "änder", "alkor", "finkar", "kråkor", "höns", "vadare", "måsar", "rovfåglar", "ugglor", "hackspettar", "sångare", "flugsnappare"]; // justera efter behov
             const statistik = [];
 
             grupperAttVisa.forEach(grupp => {
@@ -1126,28 +1150,47 @@
                 }
             });
 
+            if (statistik.length === 0) {
+                let html = "<table style='font-size: 0.9em; border-collapse: collapse;'>"
+                        //+ "<tr><td style='height: 1.5em;'>&nbsp;</td></tr>"
+                        + "</table>";
+                document.getElementById("groupStats").innerHTML = html;
+                return;
+            }
+
             // Sortera i fallande ordning efter % rätt
             statistik.sort((a, b) => b.procent - a.procent);
 
             // Bygg HTML-tabellen
-            let html = "<p style='font-weight: bold; font-size: 0.9em; margin-bottom: 8px;'>Resultat per artgrupp</p>";
-            html += "<table style='font-size: 0.9em; border-collapse: collapse;'>";
+            let html = "<table style='font-size: 0.9em; border-collapse: collapse;'>";
 
             statistik.forEach(row => {
                 html += `<tr>
-                    <td style="padding-right: 10px;">${row.grupp.charAt(0).toUpperCase() + row.grupp.slice(1)}</td>
-                    <td style="padding-right: 10px;">${row.procent}%</td>
-                    <td> efter ${row.totalTries} försök</td>
+                    <td style="padding-left: 30px; padding-right: 10px; font-size: 1em; ">
+                        ${row.grupp.charAt(0).toUpperCase() + row.grupp.slice(1)}
+                    </td>
+                    <td style="padding-right: 10px; font-size: 0.85em;">${row.procent}%</td>
+                    <td style="font-size: 0.85em;">efter ${row.totalTries} försök</td>
                 </tr>`;
             });
-
-            html += "</table>";
 
             html += "</table>";
             document.getElementById("groupStats").innerHTML = html;
         }
 
+        function uppdateraTräningsknappar() {
+            const aktiv = guessList.length > 0;
 
+            document.getElementById("trainButtons").style.display = "flex";
+            document.getElementById("clueButtons").style.display = "block";
+            document.getElementById("guessing").style.display = "flex";
+
+            document.getElementById("playButton").disabled = !aktiv;
+            document.getElementById("clueButton").disabled = !aktiv;
+            const guessInput = document.getElementById("guessInput");
+            guessInput.disabled = !aktiv;
+            guessInput.title = aktiv ? "Skriv en art eller klicka i listan" : "";
+        }
 
 
     </script>
