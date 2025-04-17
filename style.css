@@ -429,3 +429,14 @@ details[open] summary {
   border-color: #4a6c8c;
 }
 
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* eller space-between om du vill att ikonen går längst till höger */
+  gap: 10px;
+}
+
+.header-icon {
+  width: 32px;
+  height: 32px;
+}
