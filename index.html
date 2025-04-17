@@ -211,7 +211,6 @@
             ]);
             console.log("BirdFacts:", birdFacts);
             console.log("Artgrupper:", artgrupper);
-            //console.log("birdImageList:", birdImageList);
 
             resetLists();
             uppdateraTräningsknappar();
@@ -322,7 +321,6 @@
 
             const normalize = str => str.trim().toLowerCase().replace(/\s+/g, ' ');
             const foundKey = Object.keys(artgrupper).find(key => normalize(key) === normalize(query));            
-            console.log("foundKey",foundKey,"query",query);
 
             if (foundKey) {
                 const speciesList = artgrupper[foundKey]; // Lista med svenska artnamn
@@ -502,7 +500,6 @@
                 const randomRecording = await fetchRecording(currentSpecies, selectedTypes);
                 
                 if (avbrutenLjudsökning) {
-                    //console.log("🔇 Ljudet avbröts p.g.a. återställning");
                     return;
                 }
 
@@ -538,76 +535,86 @@
                 "Loxia bifasciata": "Loxia leucoptera"
             };
             const lookupSpecies = speciesOverride[currentSpecies] || currentSpecies;
-            // const cacheKey = currentSpecies + (songOnly ? "_song" : "_all");
-            // Bygg cacheKey beroende på valda typer
             const typeKey = selectedTypes.length > 0 ? selectedTypes.join("_") : "all";
             const cacheKey = currentSpecies + "_" + typeKey;
 
-                // ✅ Kolla cache först
             if (soundCache[cacheKey]?.length > 0) {
-                console.log(`🎧 Hämtar från cache: ${currentSpecies}`);
+                //console.log(`🎧 Hämtar från cache: ${cacheKey}`);
                 const cached = soundCache[cacheKey];
                 return cached[Math.floor(Math.random() * cached.length)];
             }
 
-            const countries = ["sweden", "norway", "finland"];
-            const minAntal = 20; // Försök hitta 20 i Norden annars världen
+            const minAntal = 20;
             let allRecordings = [];
 
-            const typeQuery = selectedTypes.length > 0
-                ? selectedTypes.map(t => `type:${t}`).join(" OR ")
-                : "";
+            function filterByTypesAndQuality(recordings, types, qualityLevels = null) {
+                const typesLower = types.map(t => t.toLowerCase());
 
-            for (const country of countries) {      // sök i norden
-                // let query = `grp:birds+cnt:${country}+${lookupSpecies}`;
-                // if (songOnly) query += "+type:song";
-                let query = `grp:birds+cnt:${country}+${lookupSpecies}`;
-                if (typeQuery) query += "+" + typeQuery.replace(/\s+/g, "+");
+                return recordings.filter(rec => {
+                    const matchesType =
+                        types.length === 0 || typesLower.includes(rec.type.toLowerCase());
 
+                    const matchesQuality =
+                        !qualityLevels || qualityLevels.length === 0 || qualityLevels.includes(rec.q);
+
+                    return matchesType && matchesQuality;
+                });
+            }
+
+            // Försök hitta ljud i Norden
+            const countries = ["sweden", "norway", "finland"];
+            for (const country of countries) {
+                const query = `${lookupSpecies}+cnt:${country}`;
                 const response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
                 const data = await response.json();
 
                 if (data.recordings?.length > 0) {
-                    allRecordings = allRecordings.concat(data.recordings);
-                    // console.log(`➕ Lade till ${data.recordings.length} från ${country}`);
-                }
-
+                    const filtered = filterByTypesAndQuality(data.recordings, selectedTypes, ["A", "B"]);
+                    //console.log( country, "Före:", data.recordings.length, "Efter filtrering:", filtered.length);
+                    allRecordings = allRecordings.concat(filtered);
+                } 
                 if (allRecordings.length >= minAntal) break;
             }
 
-            if (allRecordings.length < minAntal) {  // Sök i hela världen om färre än minAntal
-                // let query = `grp:birds+${lookupSpecies}`;
-                // if (songOnly) query += "+type:song";
-                let query = `grp:birds+${lookupSpecies}`;
-                if (typeQuery) query += "+" + typeQuery.replace(/\s+/g, "+");
+            // Om det inte räcker, sök globalt
+            if (allRecordings.length < minAntal) {
+                let page = 1;
+                let hasMore = true;
 
-                const response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
-                const data = await response.json();
+                while (hasMore && allRecordings.length < minAntal) {
+                    const query = `${lookupSpecies}&page=${page}`;
+                    const response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
+                    const data = await response.json();
 
-                if (data.recordings?.length > 0) {
-                    allRecordings = allRecordings.concat(data.recordings);
-                    //console.log(`🌍 Hittade ${data.recordings.length} globala inspelningar`);
-                    //addToSoundCache(currentSpecies, data.recordings, songOnly); // Spara artens ljudinspelningar i soundCache
-                    addToSoundCache(currentSpecies, data.recordings, typeKey);
-                }
-            } else {
-                // ✅ Lägg till nordiska om få i cache
-                if (allRecordings.length > 0 && soundCacheOrder.length < maxCacheSize) {
-                    // addToSoundCache(currentSpecies, allRecordings, songOnly);
-                    addToSoundCache(currentSpecies, allRecordings, typeKey);
+                    if (data.recordings?.length > 0) {
+                        let filtered = filterByTypesAndQuality(data.recordings, selectedTypes, ["A", "B"]);
+
+                        if (filtered.length < minAntal && page === 1) {
+                            filtered = filterByTypesAndQuality(data.recordings, selectedTypes); // alla kvaliteter
+                        }
+
+                        allRecordings = allRecordings.concat(filtered);
+                    }
+
+                    page += 1;
+                    hasMore = data.numPages && page <= data.numPages;
                 }
             }
-            
+
+            if (allRecordings.length > 0 && soundCacheOrder.length < maxCacheSize) {
+                addToSoundCache(currentSpecies, allRecordings, typeKey);
+            }
 
             if (allRecordings.length === 0) {
                 console.warn("⚠️ Inga inspelningar hittades.");
                 return null;
             }
 
-            // 🎯 Slumpa en av inspelningarna
+            //console.log("Resultat: ", allRecordings.length );
             const randomRecording = allRecordings[Math.floor(Math.random() * allRecordings.length)];
             return randomRecording;
         }
+
 
 
         function populateGuessList() {
@@ -693,7 +700,6 @@
                     if (birdFacts[currentSpecies].confusionSpecies.length > 4) {
                         birdFacts[currentSpecies].confusionSpecies.shift(); // tar bort den äldsta förväxlingsarten
                     }
-                    //console.log("lagt till förväxlingsart: ", birdFacts[currentSpecies].confusionSpecies)
                 }
                 
             }
@@ -705,18 +711,9 @@
           
             await showSpeciesImage(birdFacts[currentSpecies].name);
 
-            // document.getElementById('nbTries').textContent = nbTries;
-            // document.getElementById('nbCorrect').textContent = nbCorrect;
-            //const streakContainer = document.getElementById("streakContainer");
-            // if (streakCount > 4) {
-            //     streakContainer.style.display = "block"; // Visa om > 5
-            //     document.getElementById('nbInRow').textContent = streakCount;
-            // } else {
-            //     streakContainer.style.display = "none"; // Dölj annars
-            // }
-            resultSpeciesDiv.innerHTML = `${birdFacts[currentSpecies].name} <em>${currentSpecies}</em> ${getSexSymbol(currentSpeciesSex)}`;  // Artnamn under bild Latinskt namn i kursiv stil
+            resultSpeciesDiv.innerHTML = `${birdFacts[currentSpecies].name} <em>${currentSpecies}</em> ${getSexSymbol(currentSpeciesSex)}`;
 
-            document.getElementById('guessInput').value = "" //nollställ gissa-rutan
+            document.getElementById('guessInput').value = ""
             dropDown();
         }
 
@@ -737,16 +734,12 @@
                 const nameWithoutExt = filename.replace(/\.[^/.]+$/, "");
                 const normalizedFile = normalizeName(nameWithoutExt);
                 return normalizedFile.includes(normalizedSvName);
-            });
-
-            console.log("Bild ", svName, normalizedSvName, matchingLocal, Object.keys(birdMetadata).length);
-            
+            });           
 
             if (matchingLocal.length > 0) {
                 const randomLocal = matchingLocal[Math.floor(Math.random() * matchingLocal.length)];
                 const localUrl = `birdPicts/${randomLocal}`;
 
-                console.log(birdMetadata[randomLocal]);
             // Hämta metadata för bilden
             const meta = birdMetadata[randomLocal];
                 let titleText = "";
@@ -789,7 +782,6 @@
                     }
                 }
             } catch (error) {
-                console.error("Fel vid bildhämtning:", error);
                 imageDiv.innerHTML = "<p>Kunde inte ladda bilden.</p>";
             }
         }
@@ -813,9 +805,8 @@
                 
                 if (exactMatch.length > 0) {
                     const randomImage = exactMatch[Math.floor(Math.random() * exactMatch.length)];
-                    return randomImage.previewURL; // Eller randomImage.webformatURL för större bild
+                    return randomImage.previewURL; 
                 } else {
-                    //console.warn("Inga bilder hittades för sökningen:", speciesSV);
                     return null;
                 }
             } catch (error) {
@@ -1074,7 +1065,6 @@
         function addToSoundCache(species, recordings, typeKey) {
             if (!recordings || recordings.length === 0) return;
 
-            // const cacheKey = species + (songOnly ? "_song" : "_all");
             const cacheKey = species + "_" + typeKey;
 
             if (soundCache[cacheKey]) {
@@ -1085,21 +1075,17 @@
 
             soundCache[cacheKey] = recordings;
             soundCacheOrder.push(cacheKey); //Lägg till sist i kön
-            //console.log(`La till i cache för art: ${species}`);
 
-            // Rensa om vi överstiger gränsen
             if (soundCacheOrder.length > maxCacheSize) {
                 const oldestSpecies = soundCacheOrder.shift(); // Ta bort första
                 delete soundCache[oldestSpecies];
-                //console.log(`🗑 Rensade cache för: ${oldestSpecies}`);
             }
-            console.log("Cache:", soundCache);
+            //console.log("Cache:", soundCache);
         }
 
         function trackSearch(query) {
             if (!query) return;
             searchHistory.push(query);
-            //console.log("Sökhistorik: ", searchHistory)
         }
 
         function getSelectedSoundTypes() {
