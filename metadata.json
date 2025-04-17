@@ -32,17 +32,17 @@
   "Blåmes 1.webp": {
     "id": null,
     "provider": "Pixabay",
-    "species":" Blåmes",
+    "species": " Blåmes",
     "latinName": "Cyanistes caeruleus",
     "source": null,
-    "photographer": "BMeyendriesch"    ,
+    "photographer": "BMeyendriesch",
     "license": "Pixabay License",
     "country": null
   },
   "Blåmes 2.webp": {
     "id": null,
     "provider": "Pixabay",
-    "species":" Blåmes",
+    "species": " Blåmes",
     "latinName": "Cyanistes caeruleus",
     "source": null,
     "photographer": "Jggrz",
@@ -189,7 +189,7 @@
     "license": null,
     "country": null
   },
-   "Nötkråka.webp": {
+  "Nötkråka.webp": {
     "id": null,
     "provider": "AI",
     "species": null,
@@ -7578,5 +7578,145 @@
     "photographer": "ahmedm",
     "license": "Unknown",
     "country": "Marseillan, France"
+  },
+  "kornsparv_3.webp": {
+    "id": 270273681,
+    "provider": "iNaturalist",
+    "species": "Kornsparv",
+    "latinName": "Emberiza calandra",
+    "source": "https://www.inaturalist.org/observations/270273681",
+    "photographer": "annalesnaya",
+    "license": "Unknown",
+    "country": "Levyi Bereg Dona (Left Shore of Don River), Ростовская обл., Россия"
+  },
+  "ortolansparv_1.webp": {
+    "id": 269249027,
+    "provider": "iNaturalist",
+    "species": "Ortolansparv",
+    "latinName": "Emberiza hortulana",
+    "source": "https://www.inaturalist.org/observations/269249027",
+    "photographer": "עומר וינר",
+    "license": "Unknown",
+    "country": null
+  },
+  "ortolansparv_2.webp": {
+    "id": 270140961,
+    "provider": "iNaturalist",
+    "species": "Ortolansparv",
+    "latinName": "Emberiza hortulana",
+    "source": "https://www.inaturalist.org/observations/270140961",
+    "photographer": "Johannes",
+    "license": "Unknown",
+    "country": "Lienz, Österreich"
+  },
+  "ortolansparv_3.webp": {
+    "id": 267266189,
+    "provider": "iNaturalist",
+    "species": "Ortolansparv",
+    "latinName": "Emberiza hortulana",
+    "source": "https://www.inaturalist.org/observations/267266189",
+    "photographer": "shachar_alterman",
+    "license": "Unknown",
+    "country": "Israel"
+  },
+  "gulsparv_1.webp": {
+    "id": 270422942,
+    "provider": "iNaturalist",
+    "species": "Gulsparv",
+    "latinName": "Emberiza citrinella",
+    "source": "https://www.inaturalist.org/observations/270422942",
+    "photographer": "Marek Jobda",
+    "license": "Unknown",
+    "country": "Powiat przasnyski, Polska"
+  },
+  "gulsparv_2.webp": {
+    "id": 270412051,
+    "provider": "iNaturalist",
+    "species": "Gulsparv",
+    "latinName": "Emberiza citrinella",
+    "source": "https://www.inaturalist.org/observations/270412051",
+    "photographer": "Elizaveta Volkova",
+    "license": "Unknown",
+    "country": "Воскресенский р-н, Нижегородская обл., Россия"
+  },
+  "gulsparv_3.webp": {
+    "id": 270868499,
+    "provider": "iNaturalist",
+    "species": "Gulsparv",
+    "latinName": "Emberiza citrinella",
+    "source": "https://www.inaturalist.org/observations/270868499",
+    "photographer": "maria meizoso",
+    "license": "Unknown",
+    "country": "La Coruña, España"
+  },
+  "sävsparv_2.webp": {
+    "id": 270763485,
+    "provider": "iNaturalist",
+    "species": "Sävsparv",
+    "latinName": "Emberiza schoeniclus",
+    "source": "https://www.inaturalist.org/observations/270763485",
+    "photographer": "Teemu T",
+    "license": "Unknown",
+    "country": "Kerava, Suomi"
+  },
+  "sävsparv_3.webp": {
+    "id": 270931098,
+    "provider": "iNaturalist",
+    "species": "Sävsparv",
+    "latinName": "Emberiza schoeniclus",
+    "source": "https://www.inaturalist.org/observations/270931098",
+    "photographer": "Jon J. Laysell",
+    "license": "Unknown",
+    "country": "East Sussex, UK"
+  },
+  "videsparv_2.webp": {
+    "id": 264712904,
+    "provider": "iNaturalist",
+    "species": "Videsparv",
+    "latinName": "Emberiza rustica",
+    "source": "https://www.inaturalist.org/observations/264712904",
+    "photographer": "小铖/Smalltown",
+    "license": "Unknown",
+    "country": "Hangzhou, CN-ZJ, CN"
+  },
+  "videsparv_3.webp": {
+    "id": 269363644,
+    "provider": "iNaturalist",
+    "species": "Videsparv",
+    "latinName": "Emberiza rustica",
+    "source": "https://www.inaturalist.org/observations/269363644",
+    "photographer": "Elena Kudryavtseva",
+    "license": "Unknown",
+    "country": "Kandalaksha gorsovet, RU-MM, RU"
+  },
+  "dvärgsparv_1.webp": {
+    "id": 266345497,
+    "provider": "iNaturalist",
+    "species": "Dvärgsparv",
+    "latinName": "Emberiza pusilla",
+    "source": "https://www.inaturalist.org/observations/266345497",
+    "photographer": "observe-syz",
+    "license": "Unknown",
+    "country": "中国云南省昆明市呈贡区"
+  },
+  "dvärgsparv_2.webp": {
+    "id": 270134677,
+    "provider": "iNaturalist",
+    "species": "Dvärgsparv",
+    "latinName": "Emberiza pusilla",
+    "source": "https://www.inaturalist.org/observations/270134677",
+    "photographer": "王進發",
+    "license": "Unknown",
+    "country": "連江縣東引鄉樂華村69號"
+  },
+  "dvärgsparv_3.webp": {
+    "id": 268388548,
+    "provider": "iNaturalist",
+    "species": "Dvärgsparv",
+    "latinName": "Emberiza pusilla",
+    "source": "https://www.inaturalist.org/observations/268388548",
+    "photographer": "castle_pendragon",
+    "license": "Unknown",
+    "country": "中国山东省青岛市即墨区"
   }
 }
