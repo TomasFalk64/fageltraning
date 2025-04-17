@@ -60,7 +60,7 @@
                 </div>
             </details>
 
-            <div style="display: flex; align-items: center; margin-top: 30px;">
+            <div style="display: flex; align-items: flex-end; margin-top: 30px;">
                 
                 <input type="text"
                     id="speciesInput"
@@ -68,8 +68,8 @@
                     title="Skriv t.ex. gråsparv, sparv, sparvar, passer eller skog"
                     style="flex: 1;">
 
-                <button id="resetButton" title="Återställ" style="margin-left: 10px;">
-                    <i class="fas fa-sync-alt"></i>  <!-- Ikon för återställning -->
+                    <button id="resetButton" title="Återställ" class="image-button">
+                    <img src="forsärla_reset.png" alt="Återställ" class="forsarla-icon">
                 </button>
             </div>
 
@@ -100,16 +100,18 @@
             
             <div id="resultSpecies" class="result-species"></div>
 
-            <div id="guessing" style="display: flex; align-items: center; gap: 8px; margin-top: 5px;">
+            <div id="guessing" style="display: flex; align-items: flex-end; gap: 8px; margin-top: 5px;">
                 <input type="text" id="guessInput"
                     onkeyup="dropDown()"
                     placeholder="Klicka i listan för att gissa"
                     title="Skriv ett namn"
                     style="flex: 1; height: 22px; font-size: 13px; padding: 3px 6px;">   
                               
-                <button id="resetGuessButton" title="Rensa gissningslista" style="margin-left: 10px;">
-                  <i class="fas fa-sync-alt"></i>
+                <button id="resetGuessButton" class="image-button" title="Rensa gissningslista">
+                    <img src="bofink_reset.png" alt="Reset" class="bofink-icon">
                 </button>
+                  <!-- <i class="fas fa-sync-alt"></i> -->
+                
             </div>
 
             <div style="margin-top: 5px;"></div>
