@@ -38,7 +38,7 @@
     />
     <div class="header-container">
         <h1 class="page-title">&nbsp;&nbsp;&nbsp;Träna fågelsång</h1>
-        <img src="Dendrocopos minor.png" alt="Mindre hackspett" class="header-icon">
+        <!-- <img src="Dendrocopos minor.png" alt="Mindre hackspett" class="header-icon"> -->
     </div>
     
     <div class="container">
@@ -145,7 +145,11 @@
         </div>
 
         <div class="statistics">
-            <p class="section-title" style="margin-bottom: 10px;">Statistik</p>
+            <!-- <p class="section-title" style="margin-bottom: 10px;">Statistik</p> -->
+            <div style="position: relative;">
+                <p class="section-title" style="margin-bottom: 10px;">Statistik</p>
+                <img src="Dendrocopos_minor_right.png" alt="Statistikikon" style="position: absolute; right: 0; top: 0; height: 45px;">
+            </div>
 
             <div id="resultBar" style="margin-top: 10px; font-size: 0.9em;"></div>
  
@@ -192,6 +196,7 @@
         let streakCount= 0;
         let avbrutenLjudsökning = false;
         let guessLocked = false;
+        let guessHistory = []; // 1 eller 0 för varje gissning
         
         let birdFacts = {};
         let artgrupper = {};
@@ -203,6 +208,7 @@
         const soundCache = {};
         const soundCacheOrder = [];
         const maxCacheSize = 20;
+        const maxGuessHistory = 20;
 
         let progressChart;
         let accuracyData = [];
@@ -213,11 +219,11 @@
             birdImageList = await response.json();
         }
 
-        async function loadBirdFacts() {
-            const response = await fetch('birdFacts.json'); 
-            const temp = await response.json();
-            birdFacts = temp;
-        }
+        // async function loadBirdFacts() {
+        //     const response = await fetch('birdFacts.json'); 
+        //     const temp = await response.json();
+        //     birdFacts = temp;
+        // }
         
          async function loadArtgrupper() {
             const response = await fetch('artgrupper.json'); 
@@ -229,7 +235,48 @@
             birdMetadata = await response.json(); 
         }
 
+        function validateBirdFacts(temp) {
+            const validated = {};
+            let count = 0;
 
+            for (const key in temp) {
+                const art = temp[key];
+                const isValid =
+                    typeof art.name === "string" &&
+                    typeof art.nbTries === "number" &&
+                    typeof art.nbCorrect === "number" &&
+                    Array.isArray(art.confusionSpecies);
+
+                if (isValid) {
+                    validated[key] = art;
+                    count++;
+                } else {
+                    console.warn(`⚠️ Ogiltig artdata för "${key}" – hoppar över`);
+                }
+            }
+
+            return { validated, count };
+        }
+
+
+        async function loadBirdFacts() {
+            try {
+                const response = await fetch('birdFacts.json');
+                const temp = await response.json();
+
+                if (typeof temp !== 'object' || Object.keys(temp).length === 0) {
+                    throw new Error("❌ JSON verkar inte innehålla artdata.");
+                }
+
+                const { validated, count } = validateBirdFacts(temp);
+                birdFacts = validated;
+                console.log(`Laddade in ${count} arter från birdFacts.json`);
+
+            } catch (error) {
+                console.error("🚫 Fel vid inläsning av birdFacts.json:", error);
+                showCustomAlert("Fel vid inläsning av fågeldata. Kontrollera filens format.");
+            }
+        }
 
         async function init() {
             await Promise.all([
@@ -680,7 +727,10 @@
 
         async function showGuessResult(speciesLat, speciesSV) {
 
-            if (guessLocked) return;
+            if (guessLocked) {
+                showCustomAlert("Du har redan gissat.<br>Klicka på 'Träna på nytt läte'<br>");
+                return;
+            };
 
             const resultDiv = document.getElementById("guessResult");
             const resultSpeciesDiv = document.getElementById("resultSpecies");
@@ -688,6 +738,10 @@
             let responseText;
 
             const isCorrect = speciesLat.toLowerCase() === currentSpecies.toLowerCase();
+
+            if (isCorrect) {guessHistory.push(1);}
+            else {guessHistory.push(0);}
+            if (guessHistory.length > maxGuessHistory) guessHistory.shift(); 
 
             nbTries += 1;
             birdFacts[currentSpecies].nbTries += 1;
@@ -720,7 +774,7 @@
                 responseText = correctResponses[Math.floor(Math.random() * correctResponses.length)];
                 }  
             } else {
-                // guessLocked = true;
+                guessLocked = true;
                 const incorrectResponses = [
                     `❌ Fel!`,
                     "😕 Miss. Försök igen",
@@ -903,9 +957,15 @@
             const reader = new FileReader();
             reader.onload = async function (event) {
                 try {
-                    birdFacts = JSON.parse(event.target.result); // Spara innehållet i variabeln
-                    showCustomAlert("Fil med fågeldata har laddats in!");
-                    visaArtgruppStatistik();
+                    const parsed = JSON.parse(event.target.result); 
+                    const { validated, count } = validateBirdFacts(parsed);
+                    if (count === 0) {
+                        showCustomAlert("Filen innehåller ingen giltig fågeldata.");
+                    } else {
+                        birdFacts = validated;
+                        showCustomAlert(`Fågeldata har laddats in! (${count} arter)`);
+                        visaArtgruppStatistik();
+                    }
                 } catch (error) {
                     showCustomAlert("Fel vid inläsning av JSON-filen.");
                     console.error("JSON-parse-fel:", error);
@@ -1030,7 +1090,7 @@
                     data: {
                         labels: attemptLabels,
                         datasets: [{
-                            label: '% rätt',
+                            label: `% rätt (senaste ${Math.min(guessHistory.length, 20)})`,
                             data: accuracyData,
                             borderColor: 'green',
                             backgroundColor: 'rgba(0,128,0,0.1)',
@@ -1042,7 +1102,7 @@
                     options: {
                         responsive: true,
                         plugins: {
-                            legend: { display: false }
+                            legend: { display: false, position: 'top' } 
                         },
                         scales: {
                             y: {
@@ -1060,20 +1120,26 @@
             }
 
             // Lägg bara till datapunkt om det finns försök
-            if (nbTries > 0) {
-                const percent = Math.round((nbCorrect / nbTries) * 100);
+            if (guessHistory.length > 0) {
+                const recent = guessHistory.slice(-maxGuessHistory);
+                const percent = Math.round((recent.reduce((a, b) => a + b, 0) / recent.length) * 100);  //medel av recent
+
                 accuracyData.push(percent);
                 attemptLabels.push(nbTries.toString());
 
-                if (accuracyData.length > 20) {
+                if (accuracyData.length > maxGuessHistory) {
                     accuracyData.shift();
                     attemptLabels.shift();
                 }
-            }
+            
+                progressChart.data.labels = attemptLabels;
+                progressChart.data.datasets[0].data = accuracyData;
 
-            progressChart.data.labels = attemptLabels;
-            progressChart.data.datasets[0].data = accuracyData;
+                // Dynamiskt uppdaterad etikett
+                progressChart.data.datasets[0].label = `% rätt (senaste ${recent.length})`;
+            }
             progressChart.update();
+           
         }
 
         function resetGuessList() {
@@ -1141,8 +1207,12 @@
         function showCustomAlert(message) {
             const alertBox = document.getElementById("customAlert");
             const alertText = document.getElementById("customAlertText");
+            const okButton = alertBox.querySelector("button"); // hitta OK-knappen
+
             alertText.innerHTML = message;
             alertBox.style.display = "block";
+
+            okButton.focus(); // 🔍 sätt fokus på knappen
         }
 
         function hideCustomAlert() {
