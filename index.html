@@ -29,8 +29,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <img 
+        src="images/Dendrocopos_minor.png" 
+        alt="" 
+        role="presentation" 
+        aria-hidden="true" 
+        style="width: 1px; height: 1px; opacity: 0; position: absolute; pointer-events: none;" 
+    />
     <div class="header-container">
-        <h1 class="page-title">Träna fågelsång</h1>
+        <h1 class="page-title">&nbsp;&nbsp;&nbsp;Träna fågelsång</h1>
         <img src="Dendrocopos minor.png" alt="Mindre hackspett" class="header-icon">
     </div>
     
@@ -184,6 +191,7 @@
         let nbCorrect = 0;
         let streakCount= 0;
         let avbrutenLjudsökning = false;
+        let guessLocked = false;
         
         let birdFacts = {};
         let artgrupper = {};
@@ -504,6 +512,7 @@
             document.getElementById('guessInput').value = ""
             document.getElementById('speciesImage').innerHTML = "";
             document.getElementById('resultSpecies').textContent = "";
+            guessLocked = false;
             
             if (!guessList || guessList.length === 0) { 
                 showCustomAlert("Välj arter att träna på &nbsp;")
@@ -670,6 +679,9 @@
 
 
         async function showGuessResult(speciesLat, speciesSV) {
+
+            if (guessLocked) return;
+
             const resultDiv = document.getElementById("guessResult");
             const resultSpeciesDiv = document.getElementById("resultSpecies");
             const imageDiv = document.getElementById("speciesImage"); 
@@ -681,6 +693,7 @@
             birdFacts[currentSpecies].nbTries += 1;
 
             if (isCorrect) {
+                guessLocked = true;
                 nbCorrect += 1;
                 birdFacts[currentSpecies].nbCorrect += 1;
                 streakCount += 1;
@@ -707,6 +720,7 @@
                 responseText = correctResponses[Math.floor(Math.random() * correctResponses.length)];
                 }  
             } else {
+                // guessLocked = true;
                 const incorrectResponses = [
                     `❌ Fel!`,
                     "😕 Miss. Försök igen",
@@ -752,11 +766,20 @@
 
             const normalizedSvName = normalizeName(svName);
             
+            // const matchingLocal = birdImageList.filter(filename => {
+            //     const nameWithoutExt = filename.replace(/\.[^/.]+$/, "");
+            //     const normalizedFile = normalizeName(nameWithoutExt);
+            //     return normalizedFile.includes(normalizedSvName);
+            // });  
             const matchingLocal = birdImageList.filter(filename => {
                 const nameWithoutExt = filename.replace(/\.[^/.]+$/, "");
                 const normalizedFile = normalizeName(nameWithoutExt);
-                return normalizedFile.includes(normalizedSvName);
-            });           
+
+                return (
+                    normalizedFile === normalizedSvName || 
+                    normalizedFile.startsWith(normalizedSvName)
+                );
+            });         
 
             if (matchingLocal.length > 0) {
                 const randomLocal = matchingLocal[Math.floor(Math.random() * matchingLocal.length)];
