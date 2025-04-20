@@ -94,7 +94,12 @@
                     title="Skriv t.ex. gråsparv, sparv, sparvar, passer eller skog"
                     style="flex: 1;">
 
-                    <button id="resetButton" title="Återställ" class="image-button">
+                <button id="searchSpeciesButton" title="Sök"
+                    class="search-button">
+                    <img src="search_icon.png" alt="Sök" class="search-icon">
+                </button>
+
+                <button id="resetButton" title="Återställ" class="image-button">
                     <img src="forsarla_reset.png" alt="Återställ" class="forsarla-icon">
                 </button>
             </div>
@@ -329,6 +334,10 @@
                 event.preventDefault();
                 findTrainList();
             }
+        });
+
+        document.getElementById("searchSpeciesButton").addEventListener("click", function () {
+            findTrainList();
         });
 
         document.getElementById('customClueInput').addEventListener('keydown', function(event) {
@@ -688,7 +697,7 @@
                 return null;
             }
 
-            //console.log("Resultat: ", allRecordings.length );
+            console.log(`${birdFacts[currentSpecies].name}. Antal hittade ljudfiler: ${allRecordings.length}`);
             const randomRecording = allRecordings[Math.floor(Math.random() * allRecordings.length)];
             return randomRecording;
         }
