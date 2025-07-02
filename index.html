@@ -94,12 +94,12 @@
                     title="Skriv t.ex. gråsparv, sparv, sparvar, passer eller skog"
                     style="flex: 1;">
 
-                <button id="searchSpeciesButton" title="Sök"
+                <button id="searchSpeciesButton" aria-label="Sök efter arter"
                     class="search-button">
                     <img src="search_icon.png" alt="Sök" style="height: 18px; width: 18px;">
                 </button>
 
-                <button id="resetButton" title="Återställ" class="image-button">
+                <button id="resetButton" aria-label="Återställ artval" class="image-button">
                     <img src="forsarla_reset.png" alt="Återställ" class="forsarla-icon">
                 </button>
             </div>
@@ -138,7 +138,7 @@
                     title="Skriv ett namn"
                     style="flex: 1; height: 22px; font-size: 13px; padding: 3px 6px;">   
                               
-                <button id="resetGuessButton" class="image-button" title="Rensa gissningslista">
+                <button id="resetGuessButton" class="image-button" title="Rensa gissningslista" aria-label="Rensa gissningslista" >
                     <img src="bofink_reset.png" alt="Reset" class="bofink-icon">
                 </button>
                   <!-- <i class="fas fa-sync-alt"></i> -->
@@ -187,7 +187,7 @@
 
     <footer style="text-align: center; margin-top: 40px; font-size: 0.85em; opacity: 0.7;">
         <a href="https://www.freecounterstat.com" target="_blank" title="Page counter">
-          <img src="https://counter4.optistats.ovh/private/freecounterstat.php?c=nkcezkqp3d8nx5scumkwlsas73l7htgp" border="0" alt="Page counter" />
+          <img id="pageCounter" src="https://counter4.optistats.ovh/private/freecounterstat.php?c=nkcezkqp3d8nx5scumkwlsas73l7htgp" border="0" alt="Page counter" />
         </a>
     </footer>
 
@@ -565,27 +565,26 @@
             document.getElementById("guessResult").className = "guess-result";
             document.getElementById('clueText').textContent = ""; 
             document.getElementById('customClueInput').style.display = "none"; 
-            document.getElementById('guessInput').value = ""
+            document.getElementById('guessInput').value = "";
             document.getElementById('speciesImage').innerHTML = "";
             document.getElementById('resultSpecies').textContent = "";
             guessLocked = false;
-            
+
             if (!guessList || guessList.length === 0) { 
-                showCustomAlert("Välj arter att träna på &nbsp;")
+                showCustomAlert("Välj arter att träna på &nbsp;");
                 return; 
             }
+
             document.getElementById("loadingStatus").innerHTML = `<span class="spinner"></span>`;
-            
-            
-            currentSpecies = guessList[Math.floor(Math.random() * guessList.length)]; // Ex: "Parus major"
-           
+            currentSpecies = guessList[Math.floor(Math.random() * guessList.length)];
 
             try {
                 avbrutenLjudsökning = false;
-                
+
                 const selectedTypes = getSelectedSoundTypes(); // t.ex. ["song", "call"]
                 const randomRecording = await fetchRecording(currentSpecies, selectedTypes);
-                
+                console.log("randomRecording", randomRecording);
+
                 if (avbrutenLjudsökning) {
                     return;
                 }
@@ -596,25 +595,43 @@
                     return;
                 }
 
-                currentSpeciesSex = randomRecording.sex
+                currentSpeciesSex = randomRecording.sex;
 
-                document.getElementById("audioPlayer").oncanplay = () => {
-                    const xcId = `XC${randomRecording.id}`;
-                    const recordist = randomRecording.rec || "okänd inspelare";
+                const xcId = `XC${randomRecording.id}`;
+                const recordist = randomRecording.rec || "okänd inspelare";
 
-                      document.getElementById("loadingStatus").innerHTML = `
-                        <span title="Inspelning: ${xcId} – ${recordist}\nKlicka för att öppna i Xeno-Canto">
-                            <a href="https://xeno-canto.org/${randomRecording.id}" target="_blank" style="text-decoration: none; color: inherit;">🔊</a>
-                        </span>`;
-                };
-                // spela upp ljudet
-                document.getElementById('audioPlayer').src = randomRecording.file;  // Ljudfilens URL
-                document.getElementById('audioPlayer').play();
+                // Visa info om inspelningen
+                document.getElementById("loadingStatus").innerHTML = `
+                    <span title="Inspelning: ${xcId} – ${recordist}\nKlicka för att öppna i Xeno-Canto">
+                        <a href="https://xeno-canto.org/${randomRecording.id}" target="_blank" style="text-decoration: none; color: inherit;">🔊</a>
+                    </span>`;
+
+                // spela ljud
+                const audio = document.getElementById('audioPlayer');
+                audio.pause();
+                audio.src = '';
+                audio.load();
+
+                let audioUrl = randomRecording.file;
+                if (audioUrl.startsWith("//")) {
+                    audioUrl = "https:" + audioUrl;
+                }
+
+                audio.src = audioUrl;
+                audio.load();
+                audio.play().catch(err => {
+                    console.error("Kunde inte spela upp ljudfil direkt:", err);
+                    showCustomAlert("Ljudet kunde inte spelas upp.");
+                });
+                
             } catch (error) {
                 console.error("Fel vid hämtning av ljudfil:", error);
                 document.getElementById("loadingStatus").innerHTML = `⚠️ Ingen ljudfil.`;
             }
         }
+
+
+        const XC_K = "1c0765c8458167c6d0e1273b2677e023acb0e092"; 
 
         async function fetchRecording(currentSpecies, selectedTypes = ["song"]) {
             const speciesOverride = {
@@ -626,7 +643,6 @@
             const cacheKey = currentSpecies + "_" + typeKey;
 
             if (soundCache[cacheKey]?.length > 0) {
-                //console.log(`🎧 Hämtar från cache: ${cacheKey}`);
                 const cached = soundCache[cacheKey];
                 return cached[Math.floor(Math.random() * cached.length)];
             }
@@ -638,39 +654,50 @@
                 const typesLower = types.map(t => t.toLowerCase());
 
                 return recordings.filter(rec => {
-                    const matchesType =
-                        types.length === 0 || typesLower.includes(rec.type.toLowerCase());
-
-                    const matchesQuality =
-                        !qualityLevels || qualityLevels.length === 0 || qualityLevels.includes(rec.q);
-
+                    const matchesType = types.length === 0 || typesLower.includes(rec.type?.toLowerCase());
+                    const matchesQuality = !qualityLevels || qualityLevels.length === 0 || qualityLevels.includes(rec.q);
                     return matchesType && matchesQuality;
                 });
             }
 
-            // Försök hitta ljud i Norden
+            // 1. Sök i Norden (API v3 kräver taggade queries)
             const countries = ["sweden", "norway", "finland"];
             for (const country of countries) {
-                const query = `${lookupSpecies}+cnt:${country}`;
-                const response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
+                const [genus, species] = lookupSpecies.split(" ");
+                const query = `gen:${genus.toLowerCase()} sp:${species.toLowerCase()} cnt:${country} grp:birds`;
+                console.log("Query:", query);
+
+                const params = new URLSearchParams({
+                    query: query,
+                    key: XC_K
+                });
+
+                const url = `https://xeno-canto.org/api/3/recordings?${params.toString()}`;
+                const response = await fetch(url);
                 const data = await response.json();
 
                 if (data.recordings?.length > 0) {
                     const filtered = filterByTypesAndQuality(data.recordings, selectedTypes, ["A", "B"]);
-                    //console.log( country, "Före:", data.recordings.length, "Efter filtrering:", filtered.length);
                     allRecordings = allRecordings.concat(filtered);
-                } 
+                }
+
                 if (allRecordings.length >= minAntal) break;
             }
 
-            // Om det inte räcker, sök globalt
+            // 2. Om för få inspelningar, sök globalt
             if (allRecordings.length < minAntal) {
                 let page = 1;
                 let hasMore = true;
 
                 while (hasMore && allRecordings.length < minAntal) {
-                    const query = `${lookupSpecies}&page=${page}`;
-                    const response = await fetch(`https://xeno-canto.org/api/2/recordings?query=${query}`);
+                    const [genus, species] = lookupSpecies.split(" ");
+                    const params = new URLSearchParams({
+                        query: `gen:${genus.toLowerCase()} sp:${species.toLowerCase()} grp:birds`,
+                        page,
+                        key: XC_K
+                    });
+                    const url = `https://xeno-canto.org/api/3/recordings?${params.toString()}`;
+                    const response = await fetch(url);
                     const data = await response.json();
 
                     if (data.recordings?.length > 0) {
@@ -683,7 +710,7 @@
                         allRecordings = allRecordings.concat(filtered);
                     }
 
-                    page += 1;
+                    page++;
                     hasMore = data.numPages && page <= data.numPages;
                 }
             }
@@ -701,7 +728,6 @@
             const randomRecording = allRecordings[Math.floor(Math.random() * allRecordings.length)];
             return randomRecording;
         }
-
 
 
         function populateGuessList() {
@@ -1301,6 +1327,12 @@
             guessInput.disabled = !aktiv;
             guessInput.title = aktiv ? "Skriv en art eller klicka i listan" : "";
         }
+
+        const counterImg = document.getElementById('pageCounter'); // Om bilden misslyckas att ladda
+        counterImg.onerror = function () { 
+        counterImg.style.display = 'none';
+        counterImg.parentElement.style.display = 'none'; 
+        };
 
 
     </script>
